@@ -68,6 +68,8 @@ void fragment () {
 	float fixed_radius = minfixed(UV);
 	float beamclose = beamdist(UV);
 	COLOR.a = min(max_darkness, player_radius * fixed_radius * beamclose);
+	COLOR.r = mix(COLOR.r, 1.0, 1.0 - fixed_radius);
+	//COLOR.r += (1.0 - fixed_radius) * 0.5;
 //
 //	float beamclose = 1.0 - beamdist(UV);
 //	radius = 1.0 - radius;
