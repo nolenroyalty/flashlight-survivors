@@ -13,6 +13,7 @@ uniform vec2 player_pos = vec2(0.5, 0.5);
 uniform vec2 flashlight_direction = vec2(1.0, 0.0);
 uniform float player_light_radius = 0.1;
 uniform float max_beam_width = 0.1;
+uniform float max_darkness = 1.0;
 
 
 float beamdist(vec2 uv) {
@@ -32,7 +33,7 @@ void fragment () {
 	float dist = abs(distance(UV, player_pos));
 	float radius = smoothstep(player_light_radius / 4.0, player_light_radius, dist);
 	float beamclose = beamdist(UV);
-	COLOR.a = radius * beamclose;
+	COLOR.a = min(max_darkness, radius * beamclose);
 //
 //	float beamclose = 1.0 - beamdist(UV);
 //	radius = 1.0 - radius;
@@ -54,6 +55,7 @@ shader_param/player_pos = Vector2( 0, 0 )
 shader_param/flashlight_direction = Vector2( 1, 0 )
 shader_param/player_light_radius = 0.1
 shader_param/max_beam_width = 0.1
+shader_param/max_darkness = 1.0
 
 [node name="Darkness" type="Node2D"]
 script = ExtResource( 1 )
