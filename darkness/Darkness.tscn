@@ -6,22 +6,43 @@
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
 
-uniform vec2 player_pos = vec2(0.0, 0.0);
+uniform vec2 player_pos = vec2(0.5, 0.5);
+uniform vec2 flashlight_direction = vec2(1.0, 0.0);
 uniform float player_light_radius = 0.1;
+
+float yclose(vec2 uv) {
+	float xdelta = uv.x - player_pos.x;
+	float pos = step(0.0, flashlight_direction.x) * step(0.0, xdelta);
+	float neg = step(flashlight_direction.x, 0.0) * step(xdelta, 0.0);
+	float mult = pos + neg;
+	float maxw = step(mult, 0.1);
+	
+	float slope = flashlight_direction.y / flashlight_direction.x;
+	float desired_y = player_pos.y + xdelta * slope;
+	// float dist = abs(distance(uv, vec2()))
+	float dist = abs(uv.y - desired_y);
+	return max(maxw, smoothstep(0.05, 0.1, dist));
+}
 
 void fragment () {
 	float dist = abs(distance(UV, player_pos));
-	float alpha = smoothstep(player_light_radius / 4.0, player_light_radius, dist);
+	float radius = smoothstep(player_light_radius / 4.0, player_light_radius, dist);
 	COLOR = texture(TEXTURE, UV);
-	COLOR.a = alpha;
+	//COLOR.a = 1.0;
+	
+	float beamclose = yclose(UV);
+	float dist2 = abs(distance(UV, flashlight_direction));
+	COLOR.a = min(radius, beamclose);
+	//COLOR.a += (1.0 - beamclose);
+	//COLOR.a += beamclose;
 	// COLOR = texture(TEXTURE, UV);
 	// COLOR.a = 1.0;
-	
 }"
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = SubResource( 1 )
 shader_param/player_pos = Vector2( 0, 0 )
+shader_param/flashlight_direction = Vector2( 1, 0 )
 shader_param/player_light_radius = 0.1
 
 [node name="Darkness" type="Node2D"]

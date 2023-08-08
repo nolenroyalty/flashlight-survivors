@@ -1,7 +1,8 @@
 extends Node2D
 
-var circles = {}
-var _idx = 0
+var circles := {}
+var _idx := 0
+var flashlight_direction := Vector2(0, 0)
 
 class Circle:
 	var pos = Vector2()
