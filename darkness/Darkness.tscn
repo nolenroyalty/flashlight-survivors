@@ -6,37 +6,46 @@
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
 
+const float max_dist = 1.41421;
+const float PI = 3.1415926;
+
 uniform vec2 player_pos = vec2(0.5, 0.5);
 uniform vec2 flashlight_direction = vec2(1.0, 0.0);
 uniform float player_light_radius = 0.1;
+uniform float max_beam_width = 0.1;
 
-float yclose(vec2 uv) {
-	float xdelta = uv.x - player_pos.x;
-	float pos = step(0.0, flashlight_direction.x) * step(0.0, xdelta);
-	float neg = step(flashlight_direction.x, 0.0) * step(xdelta, 0.0);
-	float mult = pos + neg;
-	float maxw = step(mult, 0.1);
-	
-	float slope = flashlight_direction.y / flashlight_direction.x;
-	float desired_y = player_pos.y + xdelta * slope;
-	// float dist = abs(distance(uv, vec2()))
-	float dist = abs(uv.y - desired_y);
-	return max(maxw, smoothstep(0.05, 0.1, dist));
+
+float beamdist(vec2 uv) {
+	float desired_angle = atan(flashlight_direction.y, flashlight_direction.x);
+	vec2 dist = uv - (player_pos - (flashlight_direction * 0.05));
+	dist = normalize(dist);
+	float my_angle = atan(dist.y, dist.x);
+	float diff1 = abs(my_angle - desired_angle);
+	float diff2 = abs(diff1 - 2.0 * PI);
+	float diff = min(diff1, diff2);
+	return smoothstep(0.0, 0.15, diff);
 }
 
 void fragment () {
+	COLOR = texture(TEXTURE, UV);
+	
 	float dist = abs(distance(UV, player_pos));
 	float radius = smoothstep(player_light_radius / 4.0, player_light_radius, dist);
-	COLOR = texture(TEXTURE, UV);
-	//COLOR.a = 1.0;
+	float beamclose = beamdist(UV);
+	COLOR.a = radius * beamclose;
+//
+//	float beamclose = 1.0 - beamdist(UV);
+//	radius = 1.0 - radius;
+//	float alpha =smoothstep(0.0, 1.0, 1.0 - beamclose - radius);
+//	float dist2 = abs(distance(UV, flashlight_direction));
+//	COLOR.a = alpha;
 	
-	float beamclose = yclose(UV);
-	float dist2 = abs(distance(UV, flashlight_direction));
-	COLOR.a = min(radius, beamclose);
-	//COLOR.a += (1.0 - beamclose);
-	//COLOR.a += beamclose;
-	// COLOR = texture(TEXTURE, UV);
-	// COLOR.a = 1.0;
+//	vec2 foo = normalize(vec2(0.5, -0.5));
+//	float angle = atan(foo.y, foo.x);
+//	float yup = step(UV.y, 0.1) * step(UV.x, 0.1) * step(3.1, angle);
+//	COLOR.r = 1.0 * yup + COLOR.r;
+//	float dup = step(0.9, UV.y) * step(UV.x, 0.1) * step(-PI / 2.0, angle);
+//	COLOR.b = 1.0 * dup + COLOR.b;
 }"
 
 [sub_resource type="ShaderMaterial" id=2]
@@ -44,6 +53,7 @@ shader = SubResource( 1 )
 shader_param/player_pos = Vector2( 0, 0 )
 shader_param/flashlight_direction = Vector2( 1, 0 )
 shader_param/player_light_radius = 0.1
+shader_param/max_beam_width = 0.1
 
 [node name="Darkness" type="Node2D"]
 script = ExtResource( 1 )
