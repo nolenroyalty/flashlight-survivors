@@ -6,34 +6,58 @@
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
 
-const float max_dist = 1.41421;
 const float PI = 3.1415926;
 
-uniform vec2 player_pos = vec2(0.5, 0.5);
-uniform vec2 flashlight_direction = vec2(1.0, 0.0);
-uniform float player_light_radius = 0.1;
-uniform float max_beam_width = 0.1;
 uniform float max_darkness = 1.0;
+uniform float beam_width_measured_in_distance_behind_player = 0.15;
 
+uniform vec2 flashlight_direction = vec2(1.0, 0.0);
+uniform vec3 player;
+uniform vec3 fixed1;
+uniform vec3 fixed2;
+uniform vec3 fixed3;
+uniform vec3 fixed4;
+uniform vec3 fixed5;
+
+float fixed_dist(vec2 uv, vec3 fixy) {
+	float radius = fixy.z;
+	float dist = distance(uv, fixy.xy);
+	return smoothstep(radius / 4.0, radius, dist);
+}
+
+float minfixed(vec2 uv) {
+	float f = fixed_dist(uv, fixed1);
+	f *= fixed_dist(uv, fixed2);
+	f *= fixed_dist(uv, fixed3);
+	f *= fixed_dist(uv, fixed4);
+	f *= fixed_dist(uv, fixed5);
+	return f;
+}
 
 float beamdist(vec2 uv) {
 	float desired_angle = atan(flashlight_direction.y, flashlight_direction.x);
-	vec2 dist = uv - (player_pos - (flashlight_direction * 0.05));
+	vec2 simulated_pos = player.xy - (flashlight_direction * beam_width_measured_in_distance_behind_player);
+	float dist_to_sim = distance(uv, simulated_pos);
+	// 1 IFF we're \"behind\" the player instead of in front of them.
+	float is_behind = step(dist_to_sim, beam_width_measured_in_distance_behind_player);
+	
+	vec2 dist = uv - (player.xy - (flashlight_direction * beam_width_measured_in_distance_behind_player));
 	dist = normalize(dist);
 	float my_angle = atan(dist.y, dist.x);
 	float diff1 = abs(my_angle - desired_angle);
 	float diff2 = abs(diff1 - 2.0 * PI);
 	float diff = min(diff1, diff2);
-	return smoothstep(0.0, 0.15, diff);
+	
+	return max(is_behind, smoothstep(0.0, 0.15, diff));
 }
 
 void fragment () {
 	COLOR = texture(TEXTURE, UV);
 	
-	float dist = abs(distance(UV, player_pos));
-	float radius = smoothstep(player_light_radius / 4.0, player_light_radius, dist);
+	float player_radius = fixed_dist(UV, player);
+	float fixed_radius = minfixed(UV);
 	float beamclose = beamdist(UV);
-	COLOR.a = min(max_darkness, radius * beamclose);
+	COLOR.a = min(max_darkness, player_radius * fixed_radius * beamclose);
 //
 //	float beamclose = 1.0 - beamdist(UV);
 //	radius = 1.0 - radius;
@@ -51,11 +75,15 @@ void fragment () {
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = SubResource( 1 )
-shader_param/player_pos = Vector2( 0, 0 )
-shader_param/flashlight_direction = Vector2( 1, 0 )
-shader_param/player_light_radius = 0.1
-shader_param/max_beam_width = 0.1
 shader_param/max_darkness = 1.0
+shader_param/beam_width_measured_in_distance_behind_player = 0.15
+shader_param/flashlight_direction = Vector2( 1, 0 )
+shader_param/player = null
+shader_param/fixed1 = null
+shader_param/fixed2 = null
+shader_param/fixed3 = null
+shader_param/fixed4 = null
+shader_param/fixed5 = null
 
 [node name="Darkness" type="Node2D"]
 script = ExtResource( 1 )

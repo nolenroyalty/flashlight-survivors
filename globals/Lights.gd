@@ -1,32 +1,36 @@
 extends Node2D
 
-var circles := {}
-var _idx := 0
-var flashlight_direction := Vector2(0, 0)
+const MAX_FIXED_LIGHTS = 5
 
 class Circle:
 	var pos = Vector2()
+	var tween = null
 	var radius = 0.0
 
 	func init(pos_, radius_):
 		pos = pos_
 		radius = radius_
+	
+	func to_vec3(viewport_size):
+		var pos_ = pos / viewport_size
+		return Vector3(pos_.x, pos_.y, radius)
 
-var player_circle = Circle.new()
+var player = Circle.new()
+var flashlight_direction := Vector2(0, 0)
+var fixed_lights = []
+var fixed_light_idx = 0
 
-func register_circle(pos, radius):
-	var circle = Circle.new()
-	circle.init(pos, radius)
-	circles[_idx] = circle
-	_idx += 1
-	return _idx - 1
+func _ready():
+	for _i in range(MAX_FIXED_LIGHTS):
+		var c = Circle.new()
+		c.init(Vector2(0, 0), 0.0)
+		fixed_lights.append(c)
 
-func update_circle(idx, pos, radius):
-	circles[idx].pos = pos
-	circles[idx].radius = radius
-
-func deregister_circle(idx):
-	circles.erase(idx)
-
-func all_circles():
-	return circles.values()
+func add_fixed_light(pos, radius):
+	var tween = get_tree().create_tween()
+	var c = fixed_lights[fixed_light_idx]
+	c.init(pos, 0.0)
+	tween.set_trans(Tween.TRANS_CUBIC)
+	tween.set_ease(Tween.EASE_OUT)
+	tween.tween_property(c, "radius", radius, 1.0)
+	fixed_light_idx = (fixed_light_idx + 1) % MAX_FIXED_LIGHTS
