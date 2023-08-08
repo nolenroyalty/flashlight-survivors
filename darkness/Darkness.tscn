@@ -18,6 +18,11 @@ uniform vec3 fixed2;
 uniform vec3 fixed3;
 uniform vec3 fixed4;
 uniform vec3 fixed5;
+uniform vec3 fixed6;
+uniform vec3 fixed7;
+uniform vec3 fixed8;
+uniform vec3 fixed9;
+uniform vec3 fixed10;
 
 float fixed_dist(vec2 uv, vec3 fixy) {
 	float radius = fixy.z;
@@ -31,6 +36,11 @@ float minfixed(vec2 uv) {
 	f *= fixed_dist(uv, fixed3);
 	f *= fixed_dist(uv, fixed4);
 	f *= fixed_dist(uv, fixed5);
+	f *= fixed_dist(uv, fixed6);
+	f *= fixed_dist(uv, fixed7);
+	f *= fixed_dist(uv, fixed8);
+	f *= fixed_dist(uv, fixed9);
+	f *= fixed_dist(uv, fixed10);
 	return f;
 }
 
@@ -84,6 +94,11 @@ shader_param/fixed2 = null
 shader_param/fixed3 = null
 shader_param/fixed4 = null
 shader_param/fixed5 = null
+shader_param/fixed6 = null
+shader_param/fixed7 = null
+shader_param/fixed8 = null
+shader_param/fixed9 = null
+shader_param/fixed10 = null
 
 [node name="Darkness" type="Node2D"]
 script = ExtResource( 1 )
