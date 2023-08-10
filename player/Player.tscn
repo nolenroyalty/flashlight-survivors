@@ -16,3 +16,4 @@ margin_bottom = 16.0
 [node name="Cone" parent="." instance=ExtResource( 2 )]
 
 [node name="LightLamp" parent="." instance=ExtResource( 3 )]
+collision_mask = 1

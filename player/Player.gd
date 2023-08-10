@@ -23,7 +23,7 @@ func set_flashlight_direction():
 
 func _process(_delta):
 	if Input.is_action_just_pressed("debug_emit_fixed_light"):
-		Lights.add_fixed_light(position, 30.0)
+		Lights.add_fixed_light(position, 35.0)
 
 func _ready():
 	Lights.player.pos = position

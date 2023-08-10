@@ -4,11 +4,11 @@
 [ext_resource path="res://player/FixedLight.gd" type="Script" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
+resource_local_to_scene = true
 radius = 30.0
 
 [node name="FixedLight" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
-scale = Vector2( 1.002, 1 )
 shape = SubResource( 1 )

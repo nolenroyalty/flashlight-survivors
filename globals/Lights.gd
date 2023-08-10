@@ -39,7 +39,8 @@ func add_fixed_light(pos, radius):
 	var dupe = fading_lights[fixed_light_idx]
 
 	var fl = FixedLight.instance()
-	add_child(fl)
+	# Ahhhh this is b ad
+	get_tree().get_current_scene().add_child(fl)
 	fl.position = pos
 	fl.radius = 0.0
 	fixed_lights[fixed_light_idx] = fl
@@ -61,7 +62,7 @@ func vec3_or_zero(node, viewport_size):
 	else:
 		return vec3_of_fixed_light(node, viewport_size)
 
-func all_lights(viewport_size):
+func get_all_lights(viewport_size):
 	var l = []
 	for fl in fixed_lights:
 		l.append(vec3_or_zero(fl, viewport_size))
