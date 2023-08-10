@@ -6,9 +6,9 @@ func _process(_delta):
 	$Sprite.material.set_shader_param("player", Lights.player.to_vec3(viewport_size))
 
 	var idx = 1
-	for light in Lights.all_lights():
+	for vec in Lights.all_lights(viewport_size):
 		var name = "fixed%s" % idx
-		var vec = light.to_vec3(viewport_size)
+		# var vec = light.to_vec3(viewport_size)
 		
 		$Sprite.material.set_shader_param(name, vec)
 		idx += 1
