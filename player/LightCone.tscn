@@ -3,7 +3,9 @@
 [ext_resource path="res://player/LightCone.gd" type="Script" id=1]
 
 [node name="Cone" type="Area2D"]
+collision_layer = 2
+collision_mask = 4
 script = ExtResource( 1 )
 
 [node name="Points" type="CollisionPolygon2D" parent="."]
-polygon = PoolVector2Array( -75, 0, 683, 183, 683, -183 )
+polygon = PoolVector2Array( 0, -18, 0, 18, 683, 183, 683, -183 )

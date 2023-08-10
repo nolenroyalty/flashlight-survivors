@@ -1,7 +1,7 @@
 extends Node2D
 
 func _process(_delta):
-	var viewport_size = get_viewport().get_size()
+	var viewport_size = U.to_shader_coords(get_viewport().get_size())
 
 	$Sprite.material.set_shader_param("player", Lights.player.to_vec3(viewport_size))
 
