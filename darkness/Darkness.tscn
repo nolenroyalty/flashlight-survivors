@@ -51,6 +51,7 @@ float beamdist(vec2 uv) {
 	float dist_to_sim = distance(uv, simulated_pos);
 	// 1 IFF we're \"behind\" the player instead of in front of them.
 	float is_behind = step(dist_to_sim, beam_width_measured_in_distance_behind_player);
+	//is_behind = 0.0;
 	
 	vec2 dist = uv - (player.xy - (flashlight_direction * beam_width_measured_in_distance_behind_player));
 	dist = normalize(dist);
@@ -59,7 +60,7 @@ float beamdist(vec2 uv) {
 	float diff2 = abs(diff1 - 2.0 * PI);
 	float diff = min(diff1, diff2);
 	
-	return max(is_behind, smoothstep(0.0, 0.15, diff));
+	return max(is_behind, smoothstep(0.0, PI/12.0, diff));
 }
 
 void fragment () {
@@ -127,5 +128,6 @@ script = ExtResource( 1 )
 [node name="Sprite" type="Sprite" parent="."]
 material = SubResource( 2 )
 position = Vector2( -1, 0 )
+scale = Vector2( 1.002, 1 )
 texture = ExtResource( 2 )
 centered = false
