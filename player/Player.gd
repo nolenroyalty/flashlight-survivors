@@ -17,6 +17,11 @@ func _physics_process(delta):
 func set_flashlight_direction():
 	var pos = get_viewport().get_mouse_position()
 	var dir = position.direction_to(pos)
+	look_at(pos)
+	# var angle = position.angle_to(pos)
+	# if angle != rotation:
+		# print(angle)
+		# rotation = angle
 	if dir != Lights.flashlight_direction:
 		Lights.flashlight_direction = dir
 	Lights.flashlight_direction = dir
