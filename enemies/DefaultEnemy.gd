@@ -1,13 +1,18 @@
 extends KinematicBody2D
 
 onready var anim = $AnimationPlayer
+onready var hitbox = $Hitbox
 
 enum S { ALIVE, DEAD }
 
 const SPEED = 75
 var health = 5
+var power = 1
 var player : Node2D = null
 var state = S.ALIVE
+var touching_player = false
+# Maybe we should just get rid of this? It's weird to have it + iframes
+var seconds_per_attack = 0.1
 
 func init(player_ : Node2D):
 	player = player_
@@ -41,10 +46,28 @@ func damage(amount):
 	else:
 		anim.play("damage")
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+func deal_damage_if_touching():
+	if touching_player:
+		player.damage(power)
+		var timer = get_tree().create_timer(seconds_per_attack)
+		timer.connect("timeout", self, "deal_damage_if_touching")
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func on_touched_player(area):
+	var player_ = area.get_parent()
+	if player != player_:
+		print("wtf? player is not player. %s | %s" % [ player, player_])
+		return
+	touching_player = true
+	deal_damage_if_touching()
+
+func on_stopped_touching_player(area):
+	var player_ = area.get_parent()
+	if player != player_:
+		print("wtf? player is not player. %s | %s" % [ player, player_])
+		return
+	touching_player = false
+
+
+func _ready():
+	var _ignore = $Hitbox.connect("area_entered", self, "on_touched_player")
+	_ignore = $Hitbox.connect("area_exited", self, "on_stopped_touching_player")

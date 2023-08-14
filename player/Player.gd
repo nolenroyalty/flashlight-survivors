@@ -1,8 +1,10 @@
 extends KinematicBody2D
 
 export (int)var SPEED = 100
-
+var health = 10
 var myidx = 2;
+var invincible = false
+var iframe_duration = 0.6
 
 # Need to prevent moving outside of the screen!
 func _physics_process(_delta):
@@ -21,6 +23,24 @@ func set_flashlight_direction():
 	if dir != Lights.flashlight_direction:
 		Lights.flashlight_direction = dir
 	Lights.flashlight_direction = dir
+
+func set_not_invincible():
+	invincible = false
+
+func damage(amount):
+	if invincible:
+		return
+	else:
+		invincible = true
+		var t = get_tree().create_tween()
+		t.tween_property(self, "modulate", Color("#696969"), iframe_duration / 2.0)
+		t.tween_property(self, "modulate", Color("#ffffff"), iframe_duration / 2.0)
+		t.tween_property(self, "invincible", false, 0.0)
+		print("ow")
+		# add iframes
+		health -= amount
+		if health <= 0:
+			print("oh noooo")
 
 func _process(_delta):
 	if Input.is_action_just_pressed("debug_emit_fixed_light"):
