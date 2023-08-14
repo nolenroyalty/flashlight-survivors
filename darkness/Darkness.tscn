@@ -51,7 +51,6 @@ float beamdist(vec2 uv) {
 	float dist_to_sim = distance(uv, simulated_pos);
 	// 1 IFF we're \"behind\" the player instead of in front of them.
 	float is_behind = step(dist_to_sim, beam_width_measured_in_distance_behind_player);
-	//is_behind = 0.0;
 	
 	vec2 dist = uv - (player.xy - (flashlight_direction * beam_width_measured_in_distance_behind_player));
 	dist = normalize(dist);

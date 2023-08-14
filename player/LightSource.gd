@@ -19,11 +19,9 @@ func damage_if_present(body):
 func on_body_entered(body):
 	bodies[body] = true 
 	start_damage_timer(body)
-	print(body)
 
 func on_body_exited(body):
 	bodies.erase(body)
-	print(body)
 
 func _ready():
 	var _ignore = connect("body_entered", self, "on_body_entered")

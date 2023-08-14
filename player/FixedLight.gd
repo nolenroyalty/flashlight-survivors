@@ -5,7 +5,6 @@ onready var shape := $CollisionShape2D
 var radius = 30.0 setget set_radius, get_radius
 
 func set_radius(v):
-	print("set")
 	radius = v
 	shape.shape.radius = v
 
