@@ -1,0 +1,7 @@
+[gd_scene format=2]
+
+[node name="HealthbarNugget" type="ColorRect"]
+margin_right = 4.0
+margin_bottom = 8.0
+rect_min_size = Vector2( 8, 16 )
+color = Color( 0.576471, 0.121569, 0.121569, 1 )

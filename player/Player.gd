@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+signal health_set(amount)
+
 export (int)var SPEED = 100
 var health = 10
 var myidx = 2;
@@ -39,6 +41,8 @@ func damage(amount):
 		print("ow")
 		# add iframes
 		health -= amount
+		health = max(health, 0)
+		emit_signal("health_set", health)
 		if health <= 0:
 			print("oh noooo")
 

@@ -1,13 +1,13 @@
 extends Node2D
 var Enemy = preload("res://enemies/DefaultEnemy.tscn")
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
+onready var player = $Player
+onready var healthbar = $Healthbar
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	player.connect("health_set", healthbar, "set_health")
+	healthbar.set_health(player.health)
 	pass # Replace with function body.
 
 
