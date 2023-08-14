@@ -16,13 +16,17 @@ func damage_if_present(body):
 			body.damage(damage_per_tick)
 		start_damage_timer(body)
 
-func on_body_entered(body):
+func entered(area):
+	var body = area.get_parent()
 	bodies[body] = true 
 	start_damage_timer(body)
 
-func on_body_exited(body):
+func exited(area):
+	var body = area.get_parent()
 	bodies.erase(body)
 
 func _ready():
-	var _ignore = connect("body_entered", self, "on_body_entered")
-	_ignore = connect("body_exited", self, "on_body_exited") 
+	# var _ignore = connect("body_entered", self, "on_body_entered")
+	# _ignore = connect("body_exited", self, "on_body_exited")
+	var _ignore = connect("area_entered", self, "entered")
+	_ignore = connect("area_exited", self, "exited")
