@@ -22,6 +22,7 @@ var flashlight_direction := Vector2(0, 0)
 var fixed_lights = []
 var fading_lights = []
 var fixed_light_idx = 0
+var light_cone_angle = 0.0
 
 func _ready():
 	for _i in range(MAX_FIXED_LIGHTS):
