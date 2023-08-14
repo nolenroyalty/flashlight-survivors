@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://enemies/DefaultEnemy.gd" type="Script" id=1]
 
@@ -112,6 +112,22 @@ tracks/2/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.392157 ) ]
 }
 
+[sub_resource type="Animation" id=8]
+resource_name = "spawn"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.1, 0.6 ), Vector2( 1.1, 1.05 ), Vector2( 1, 1 ) ]
+}
+
 [sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 16, 16 )
 
@@ -137,6 +153,7 @@ shape = SubResource( 5 )
 anims/RESET = SubResource( 3 )
 anims/damage = SubResource( 2 )
 anims/die = SubResource( 4 )
+anims/spawn = SubResource( 8 )
 
 [node name="Hurtbox" type="Area2D" parent="."]
 collision_layer = 8

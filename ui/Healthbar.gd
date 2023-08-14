@@ -18,4 +18,3 @@ func set_health(amount):
 		for _i in range(amount - count):
 			var nugget = Nugget.instance()
 			nuggetbox.add_child(nugget)
-	print(nuggetbox.get_child_count())

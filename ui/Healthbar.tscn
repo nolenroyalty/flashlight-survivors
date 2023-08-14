@@ -20,3 +20,43 @@ margin_bottom = 16.0
 margin_left = 9.0
 margin_right = 17.0
 margin_bottom = 16.0
+
+[node name="HealthbarNugget3" parent="NuggetBox" instance=ExtResource( 2 )]
+margin_left = 18.0
+margin_right = 26.0
+margin_bottom = 16.0
+
+[node name="HealthbarNugget4" parent="NuggetBox" instance=ExtResource( 2 )]
+margin_left = 27.0
+margin_right = 35.0
+margin_bottom = 16.0
+
+[node name="HealthbarNugget5" parent="NuggetBox" instance=ExtResource( 2 )]
+margin_left = 36.0
+margin_right = 44.0
+margin_bottom = 16.0
+
+[node name="HealthbarNugget6" parent="NuggetBox" instance=ExtResource( 2 )]
+margin_left = 45.0
+margin_right = 53.0
+margin_bottom = 16.0
+
+[node name="HealthbarNugget7" parent="NuggetBox" instance=ExtResource( 2 )]
+margin_left = 54.0
+margin_right = 62.0
+margin_bottom = 16.0
+
+[node name="HealthbarNugget8" parent="NuggetBox" instance=ExtResource( 2 )]
+margin_left = 63.0
+margin_right = 71.0
+margin_bottom = 16.0
+
+[node name="HealthbarNugget9" parent="NuggetBox" instance=ExtResource( 2 )]
+margin_left = 72.0
+margin_right = 80.0
+margin_bottom = 16.0
+
+[node name="HealthbarNugget10" parent="NuggetBox" instance=ExtResource( 2 )]
+margin_left = 81.0
+margin_right = 89.0
+margin_bottom = 16.0
