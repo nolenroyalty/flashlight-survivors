@@ -22,6 +22,7 @@ func _process(_delta):
 		var enemy = Enemy.instance()
 		add_child(enemy)
 	if Input.is_action_just_pressed("debug_spawn_door"):
+		# We should avoid overlapping doors
 		var door = Door.instance()
 		var x = rng.randi_range(50, 400)
 		var y = rng.randi_range(50, 300)
