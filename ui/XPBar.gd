@@ -1,15 +1,15 @@
 extends Node2D
 
+# Not very principled to store XP here vs in state, but also it doesn't matter so shrug
+
 onready var bar_tween = $BarTween
 
 signal reached_level(level)
-
-var level = 1
 var xp = 0
 
 func xp_required():
 	# Come back and fix this
-	return 10 * level
+	return 10 * State.player_level
 
 func set_foreground_scale():
 	var req = xp_required()
@@ -22,9 +22,9 @@ func add_xp(amount):
 	xp += amount
 	var req = xp_required()
 	if xp >= req:
-		level += 1
+		State.player_level += 1
 		xp = xp - req
-		emit_signal("reached_level", level)
+		emit_signal("reached_level", State.player_level)
 	set_foreground_scale()
 
 func _ready():

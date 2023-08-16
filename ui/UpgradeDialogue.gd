@@ -3,15 +3,21 @@ extends CanvasLayer
 signal finished()
 
 onready var choice_holder = $Background/ChoiceHolder
+onready var congrats = $Background/CongratsLabel
+
 var UpgradeChoice = preload("res://ui/UpgradeChoice.tscn")
 var rng : RandomNumberGenerator
-
 
 func on_upgrade_chosen(upgrade):
 	State.apply_upgrade(upgrade)
 	emit_signal("finished")
 
 func _ready():
+	for child in $ParticleHolder.get_children():
+		child.emitting = true
+
+	congrats.text = "Reached level %d!" % [State.player_level]
+
 	rng = RandomNumberGenerator.new()
 	rng.randomize()
 	var all_choices = State.available_upgrades()

@@ -5,6 +5,7 @@ signal health_set(amount)
 
 const MAX_HEALTH = 12
 var player_health = MAX_HEALTH - 2
+var player_level = 1
 
 func decrease_health(amount):
 	player_health -= amount
