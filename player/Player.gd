@@ -13,7 +13,7 @@ func _physics_process(_delta):
 	var dx = Input.get_action_strength("player_right") - Input.get_action_strength("player_left")
 	var dy = Input.get_action_strength("player_down") - Input.get_action_strength("player_up")
 	var dir = Vector2(dx, dy).normalized()
-	var speed = SPEED + 10 * State.speed_level
+	var speed = SPEED * (1.0 + 0.2 * State.speed_level)
 	var _unused_velocity = move_and_slide(dir * speed)
 #	position += dir * SPEED * delta
 	Lights.player.pos = position

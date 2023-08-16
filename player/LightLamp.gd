@@ -2,7 +2,7 @@ extends LightSource
 
 onready var shape := $CollisionShape2D
 
-const BASE_RADIUS = 35
+const BASE_RADIUS = 38
 var radius = BASE_RADIUS setget set_radius, get_radius
 
 func get_radius():
@@ -14,8 +14,13 @@ func set_radius(v):
 	Lights.player.radius = v
 
 func handle_lamp_increased(level):
-	# Circles scale quadratically with radius but idk this is fun
-	radius = BASE_RADIUS + level * 5
+	match level:
+		1, 2, 3:
+			# Circles scale quadratically with radius but idk this is fun
+			set_radius(BASE_RADIUS + level * 7.5)
+		4:
+			seconds_per_tick = 2.0
+			damage_per_tick = 1.0
 
 func _ready():
 	seconds_per_tick = 0.5

@@ -172,7 +172,7 @@ func upgrade_text(upgrade):
 				0: return "see a little more around you"
 				1: return "see a little more around you"
 				2: return "see a lot more around you"
-				3: return "see a lot more around you"
+				3: return "slowly damage enemies that are close by"
 		Upgrade.Meatballs:
 			return "3 meatballs. vegetarian."
 		Upgrade.Fire:
@@ -202,6 +202,8 @@ func upgrade_text(upgrade):
 				1: return "doors often fall apart when hit with light"
 		Upgrade.BigTote:
 			return "it's iconic"
+	
+	return "BUG NO TEXT SORRY"
 
 func apply_upgrade(upgrade):
 	match upgrade:

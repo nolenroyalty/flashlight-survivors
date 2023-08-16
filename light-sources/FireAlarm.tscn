@@ -7,11 +7,13 @@
 extents = Vector2( 259.5, 261 )
 
 [node name="FireAlarm" instance=ExtResource( 1 )]
+collision_layer = 2
 script = ExtResource( 2 )
 
 [node name="CollisionPolygon2D" type="CollisionShape2D" parent="." index="0"]
 position = Vector2( 249.5, 251 )
 shape = SubResource( 1 )
+disabled = true
 
 [node name="Timer" type="Timer" parent="." index="1"]
 wait_time = 10.0
