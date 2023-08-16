@@ -1,21 +1,33 @@
 extends Node2D
 var Enemy = preload("res://enemies/DefaultEnemy.tscn")
 var Door = preload("res://enemies/Doorway.tscn")
+var UpgradeDialogue = preload("res://ui/UpgradeDialogue.tscn")
 
 onready var player = $Player
 onready var healthbar = $Healthbar
 onready var xpbar = $XPBar
 var rng : RandomNumberGenerator 
 
+func upgrade_finished(ud):
+	ud.call_deferred("queue_free")
+	get_tree().paused = false
+
+func on_reached_level(level):
+	print("reached level %d" % [level])
+	var ud = UpgradeDialogue.instance()
+	add_child(ud)
+	ud.connect("finished", self, "upgrade_finished", [ud])
+	get_tree().paused = true
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	player.connect("health_set", healthbar, "set_health")
+	xpbar.connect("reached_level", self, "on_reached_level")
 	healthbar.set_health(player.health)
 	U.player = player
 	U.xpbar = xpbar
 	rng = RandomNumberGenerator.new()
 	rng.randomize()
-
 
 func _process(_delta):
 	if Input.is_action_just_pressed("debug_spawn_enemy"):

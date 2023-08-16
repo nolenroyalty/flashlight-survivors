@@ -6,7 +6,7 @@ var damage_per_tick = 1.0
 var bodies = {}
 
 func start_damage_timer(body):
-	var timer = get_tree().create_timer(seconds_per_tick)
+	var timer = get_tree().create_timer(seconds_per_tick, false)
 	timer.connect("timeout", self, "damage_if_present", [body])
 
 func damage_if_present(body):

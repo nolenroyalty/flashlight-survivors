@@ -50,7 +50,7 @@ func damage(amount):
 func deal_damage_if_touching():
 	if alive() and touching_player:
 		U.player.damage(power)
-		var timer = get_tree().create_timer(seconds_per_attack)
+		var timer = get_tree().create_timer(seconds_per_attack, false)
 		timer.connect("timeout", self, "deal_damage_if_touching")
 
 func on_touched_player(area):
