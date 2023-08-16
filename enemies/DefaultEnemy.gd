@@ -1,5 +1,6 @@
 extends KinematicBody2D
 
+var Explosion = preload("res://light-sources/Explosion.tscn")
 onready var anim = $AnimationPlayer
 onready var hitbox = $Hitbox
 
@@ -28,11 +29,25 @@ func die_when_dead(name):
 	if name == "die":
 		call_deferred("queue_free")
 
+func maybe_explode():
+	var exploded = State.should_explode()
+	if exploded:
+		var explosion = Explosion.instance()
+		get_parent().add_child(explosion)
+		explosion.position = position
+		return true
+	return false
+
 func die():
 	state = S.DEAD
-	anim.play("die")
-	anim.connect("animation_finished", self, "die_when_dead")
 	U.xpbar.add_xp(xp_gain)
+	if maybe_explode():
+		call_deferred("queue_free")
+	else:
+		anim.play("die")
+		anim.connect("animation_finished", self, "die_when_dead")
+	
+	
 
 func alive():
 	return state == S.ALIVE

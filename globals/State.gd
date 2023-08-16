@@ -8,6 +8,7 @@ signal alarm_enabled()
 const MAX_HEALTH = 10
 var player_health = MAX_HEALTH
 var player_level = 1
+var rng : RandomNumberGenerator
 
 func decrease_health(amount):
 	player_health -= amount
@@ -31,7 +32,6 @@ var IconExplode = preload("res://Aseprite/battery.png")
 var IconSpeed = preload("res://Aseprite/grease.png")
 var IconDrunk = preload("res://Aseprite/booze.png")
 var IconTote = preload("res://Aseprite/booze.png")
-
 
 var lamp_level = 0
 var max_lamp_level = 4
@@ -232,3 +232,15 @@ func apply_upgrade(upgrade):
 			drunkenness_level = min(drunkenness_level, max_drunkenness_level)
 		Upgrade.BigTote:
 			number_of_big_totes += 1
+
+func should_explode():
+	var chance = 0.05 * explode_level
+	if chance > 0.0:
+		chance += 0.05
+	
+	return rng.randf() < chance
+
+
+func _ready():
+	rng = RandomNumberGenerator.new()
+	rng.randomize()

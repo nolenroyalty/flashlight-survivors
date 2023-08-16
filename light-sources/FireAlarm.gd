@@ -6,12 +6,6 @@ var lights_on = false
 onready var timer = $Timer
 onready var collider = $CollisionPolygon2D
 
-func start_damage_timer(body):
-	# Only hurt enemies once per flash no matter what
-	if bodies[body] == true:
-		body.damage(damage_per_tick)
-		bodies[body] = "done"
-
 func calculate_wait_time():
 	return WAIT_TIME - (State.fire_alarm_level - 1) * 0.85
 
@@ -21,6 +15,7 @@ func handle_enable():
 func stop_flashing():
 	Lights.set_alarm_flashing(false)
 	collider.disabled = true
+	bodies = {}
 
 func flash():
 	collider.disabled = false
@@ -34,3 +29,5 @@ func _ready():
 	timer.connect("timeout", self, "flash")
 	damage_per_tick = 1
 	seconds_per_tick = null
+	damage_on_first_tick = true
+

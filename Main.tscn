@@ -37,3 +37,4 @@ z_index = 1
 [node name="OuterWalls" parent="." instance=ExtResource( 6 )]
 
 [node name="FireAlarm" parent="." instance=ExtResource( 7 )]
+position = Vector2( 0, -1 )
