@@ -2,6 +2,7 @@ extends Node2D
 
 signal player_died()
 signal health_set(amount)
+signal lamp_increased(level)
 
 const MAX_HEALTH = 10
 var player_health = MAX_HEALTH
@@ -206,6 +207,7 @@ func apply_upgrade(upgrade):
 		Upgrade.Lamp:
 			lamp_level += 1
 			lamp_level = min(lamp_level, max_lamp_level)
+			emit_signal("lamp_increased", lamp_level)
 		Upgrade.Meatballs:
 			increase_health(3)
 		Upgrade.Fire:
