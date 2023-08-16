@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://darkness/Darkness.tscn" type="PackedScene" id=1]
 [ext_resource path="res://player/Player.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://ui/Healthbar.tscn" type="PackedScene" id=4]
 [ext_resource path="res://ui/XPBar.tscn" type="PackedScene" id=5]
 [ext_resource path="res://environment/OuterWalls.tscn" type="PackedScene" id=6]
+[ext_resource path="res://light-sources/FireAlarm.tscn" type="PackedScene" id=7]
 
 [node name="Main" type="Node2D"]
 script = ExtResource( 3 )
@@ -34,3 +35,5 @@ position = Vector2( 159, 472 )
 z_index = 1
 
 [node name="OuterWalls" parent="." instance=ExtResource( 6 )]
+
+[node name="FireAlarm" parent="." instance=ExtResource( 7 )]

@@ -2,6 +2,29 @@ extends Node2D
 
 func _ready():
 	$Sprite.material.set_shader_param("light_cone_angle", Lights.light_cone_angle)
+	var _ignore = Lights.connect("alarm_flash_set", self, "handle_alarm_flash")
+
+var max_darkness = 1.0 setget set_max_darkness
+
+# we have a setter to make it easy to tween
+func set_max_darkness(val):
+	max_darkness = val
+	$Sprite.material.set_shader_param("max_darkness", val)
+
+func handle_alarm_flash(alarm_on):
+	# We should also make this red
+	if alarm_on:
+		var t = get_tree().create_tween()
+		t.tween_property(self, "max_darkness", 0.75, 0.2)
+		t.set_ease(Tween.EASE_IN_OUT)
+		# $Sprite.material.set_shader_param("max_darkness", 0.75)
+	else:
+		var t = get_tree().create_tween()
+		t.set_ease(Tween.EASE_IN_OUT)
+		t.tween_property(self, "max_darkness", 1.0, 0.2)
+		# set_max_darkness(1.0)
+		# $Sprite.material.set_shader_param("max_darkness", 1.0)
+
 
 func _process(_delta):
 	var viewport_size = U.to_shader_coords(get_viewport().get_size())

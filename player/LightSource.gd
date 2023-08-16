@@ -12,7 +12,6 @@ func start_damage_timer(body):
 func damage_if_present(body):
 	if bodies.has(body):
 		if damage_per_tick > 0:
-			print("Dealing %d damage to %s" % [damage_per_tick, body])
 			body.damage(damage_per_tick)
 		start_damage_timer(body)
 

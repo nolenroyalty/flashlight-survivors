@@ -1,5 +1,7 @@
 extends Node2D
 
+signal alarm_flash_set(value)
+
 const MAX_FIXED_LIGHTS = 5
 var FixedLight = preload("res://player/FixedLight.tscn")
 
@@ -23,11 +25,16 @@ var fixed_lights = []
 var fading_lights = []
 var fixed_light_idx = 0
 var light_cone_angle = 0.0
+var alarm_flashing = false setget set_alarm_flashing
 
 func _ready():
 	for _i in range(MAX_FIXED_LIGHTS):
 		fixed_lights.append(null)
 		fading_lights.append(null)
+
+func set_alarm_flashing(value):
+	alarm_flashing = value
+	emit_signal("alarm_flash_set", value)
 
 func vec3_of_fixed_light(fl, viewport_size):
 	var pos = fl.position / viewport_size

@@ -19,7 +19,7 @@ func _ready():
 	rng = RandomNumberGenerator.new()
 	rng.randomize()
 	var all_choices = State.available_upgrades()
-	var my_choices = []
+	var my_choices = [State.Upgrade.Fire]
 
 	for _i in range(min(len(all_choices), 3 - len(my_choices))):
 		var choice = rng.randi_range(0, len(all_choices)-1)

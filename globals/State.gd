@@ -3,6 +3,7 @@ extends Node2D
 signal player_died()
 signal health_set(amount)
 signal lamp_increased(level)
+signal alarm_enabled()
 
 const MAX_HEALTH = 10
 var player_health = MAX_HEALTH
@@ -176,7 +177,7 @@ func upgrade_text(upgrade):
 			return "3 meatballs. vegetarian."
 		Upgrade.Fire:
 			if fire_alarm_level == 0:
-				return "alarm flashes every 10 seconds"
+				return "alarm flashes every 6 seconds"
 			else:
 				return "alarm flashes more frequently"
 		Upgrade.TrackLighting:
@@ -212,6 +213,8 @@ func apply_upgrade(upgrade):
 			increase_health(3)
 		Upgrade.Fire:
 			fire_alarm_level += 1
+			if fire_alarm_level == 1:
+				emit_signal("alarm_enabled")
 			fire_alarm_level = min(fire_alarm_level, max_fire_alarm_level)
 		Upgrade.TrackLighting:
 			track_lighting_level += 1
