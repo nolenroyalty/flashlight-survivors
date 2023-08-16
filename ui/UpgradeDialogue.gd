@@ -13,20 +13,21 @@ func on_upgrade_chosen(upgrade):
 	emit_signal("finished")
 
 func _ready():
-	for child in $ParticleHolder.get_children():
-		child.emitting = true
-
+	$AnimationPlayer.play("shwoop")
 	congrats.text = "Reached level %d!" % [State.player_level]
 
 	rng = RandomNumberGenerator.new()
 	rng.randomize()
 	var all_choices = State.available_upgrades()
 	var my_choices = []
-	for _i in range(max(len(all_choices), 3)):
+
+	for _i in range(min(len(all_choices), 3 - len(my_choices))):
 		var choice = rng.randi_range(0, len(all_choices)-1)
-		print(choice)
 		my_choices.append(all_choices[choice])
 		all_choices.remove(choice)
+
+	if len(my_choices) < 3:
+		my_choices.append(State.Upgrade.BigTote)
 	
 	for choice in my_choices:
 		var choice_node = UpgradeChoice.instance()

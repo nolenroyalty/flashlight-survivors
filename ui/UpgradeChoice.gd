@@ -7,7 +7,7 @@ onready var text = $VBoxContainer/Text
 onready var title = $VBoxContainer/Title
 onready var anim := $AnimationPlayer
 var mouse_present = false
-var upgrade = State.UPGRADE.Lamp
+var upgrade = State.Upgrade.Lamp
 
 func wiggle():
 	anim.play("wiggle")
