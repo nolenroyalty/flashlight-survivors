@@ -45,3 +45,7 @@ position = Vector2( 162, 405 )
 
 [node name="Point13" type="Node2D" parent="DoorPoints"]
 position = Vector2( 74, 453 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 1.5
+autostart = true

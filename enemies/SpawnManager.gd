@@ -4,6 +4,7 @@ var Doorway = preload("res://enemies/Doorway.tscn")
 
 var can_spawn_a_door_here = {}
 var rng : RandomNumberGenerator
+onready var timer = $Timer
 
 func door_despawned(point):
 	can_spawn_a_door_here[point] = true
@@ -25,9 +26,24 @@ func spawn_door():
 	add_child(door)
 	return true
 
+func door_spawn_chance_increment():
+	if State.player_level < 5: return 0.05
+	elif State.player_level < 15: return 0.1
+	else: return 0.15
+
+var current_door_spawn_chance = .8
+func maybe_spawn():
+	current_door_spawn_chance += door_spawn_chance_increment()
+	print(current_door_spawn_chance)
+	if rng.randf() < current_door_spawn_chance:
+		if spawn_door():
+			current_door_spawn_chance = 0.1
+		else:
+			current_door_spawn_chance = 0.5
+
+
 func _process(_delta):
 	if Input.is_action_just_pressed("debug_spawn_door"):
-		# We should avoid overlapping doors
 		if spawn_door():
 			print("door spawned")
 		else:
@@ -39,3 +55,5 @@ func _ready():
 
 	for child in $DoorPoints.get_children():
 		can_spawn_a_door_here[child.position] = true
+	
+	timer.connect("timeout", self, "maybe_spawn")
