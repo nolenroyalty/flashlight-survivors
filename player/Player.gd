@@ -1,12 +1,9 @@
 extends KinematicBody2D
 
-signal health_set(amount)
-
 export (int)var SPEED = 100
-var health = 10
 var myidx = 2;
 var invincible = false
-var iframe_duration = 0.6
+var iframe_duration = 1.25
 
 # Need to prevent moving outside of the screen!
 func _physics_process(_delta):
@@ -36,17 +33,15 @@ func damage(amount):
 	else:
 		invincible = true
 		var t = get_tree().create_tween()
-		t.tween_property(self, "modulate", Color("#696969"), iframe_duration / 2.0)
-		t.tween_property(self, "modulate", Color("#ffffff"), iframe_duration / 2.0)
+		var t2 = get_tree().create_tween()
+		var duration = iframe_duration / 2.0
+		t.tween_property(self, "modulate:a", 0.25, duration)
+		t2.tween_property(self, "scale", U.v(0.75, 0.75), duration)
+		t2.tween_property(self, "scale", U.v(1.0, 1.0), duration)
+		t.tween_property(self, "modulate:a", 1.0, duration)
 		t.tween_property(self, "invincible", false, 0.0)
-		print("ow")
-		# add iframes
-		health -= amount
-		health = max(health, 0)
-		emit_signal("health_set", health)
-		if health <= 0:
-			print("oh noooo")
-
+		State.decrease_health(amount)
+		
 func _process(_delta):
 	if Input.is_action_just_pressed("debug_emit_fixed_light"):
 		Lights.add_fixed_light(position, 35.0)

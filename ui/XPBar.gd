@@ -22,6 +22,8 @@ func add_xp(amount):
 	xp += amount
 	var req = xp_required()
 	if xp >= req:
+		bar_tween.stop_all()
+		$Foreground.rect_scale.x = 1.0
 		State.player_level += 1
 		xp = xp - req
 		emit_signal("reached_level", State.player_level)

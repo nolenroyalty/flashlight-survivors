@@ -5,6 +5,7 @@ var Nugget = preload("res://ui/HealthbarNugget.tscn")
 onready var nuggetbox = $NuggetBox
 
 func set_health(amount):
+	$Label.text = str(amount)
 	var count = nuggetbox.get_child_count()
 	if amount == count:
 		print("Maybe bug: asked to set health to its current value??")

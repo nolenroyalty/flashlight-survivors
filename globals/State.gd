@@ -4,6 +4,7 @@ signal player_died()
 signal health_set(amount)
 signal lamp_increased(level)
 signal alarm_enabled()
+signal add_trauma(amount)
 
 const MAX_HEALTH = 10
 var player_health = MAX_HEALTH
@@ -16,6 +17,7 @@ func decrease_health(amount):
 		player_health = 0
 		emit_signal("player_died")
 	emit_signal("health_set", player_health)
+	emit_signal("add_trauma", 0.25)
 
 func increase_health(amount):
 	player_health += amount

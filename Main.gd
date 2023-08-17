@@ -6,6 +6,7 @@ var UpgradeDialogue = preload("res://ui/UpgradeDialogue.tscn")
 onready var player = $Player
 onready var healthbar = $Healthbar
 onready var xpbar = $XPBar
+onready var camera = $ShakeCamera
 var rng : RandomNumberGenerator 
 
 func upgrade_finished(ud):
@@ -21,9 +22,10 @@ func on_reached_level(level):
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	player.connect("health_set", healthbar, "set_health")
+	var _ignore = State.connect("health_set", healthbar, "set_health")
 	xpbar.connect("reached_level", self, "on_reached_level")
-	healthbar.set_health(player.health)
+	healthbar.set_health(State.player_health)
+	State.connect("add_trauma", camera, "add_trauma")
 	U.player = player
 	U.xpbar = xpbar
 	rng = RandomNumberGenerator.new()
