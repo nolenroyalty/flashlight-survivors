@@ -7,7 +7,7 @@ signal alarm_enabled()
 signal add_trauma(amount)
 
 const MAX_HEALTH = 10
-var player_health = MAX_HEALTH
+var player_health = MAX_HEALTH setget set_health_do_not_call
 var player_level = 1
 var rng : RandomNumberGenerator
 
@@ -23,6 +23,11 @@ func increase_health(amount):
 	player_health += amount
 	player_health = min(player_health, MAX_HEALTH)
 	emit_signal("health_set", player_health)
+
+func set_health_do_not_call(amount):
+	print("SET HEALTH CALLED DIRECTLY OOPS")
+	if amount > 0: increase_health(amount)
+	else: decrease_health(amount)
 
 enum Upgrade { Lamp, Meatballs, Fire, TrackLighting, Explode, Speed, Drunkenness, BigTote }
 
