@@ -15,12 +15,11 @@ func set_radius(v):
 
 func handle_lamp_increased(level):
 	match level:
-		1, 2, 3:
-			# Circles scale quadratically with radius but idk this is fun
-			set_radius(BASE_RADIUS + level * 10)
-		4:
+		1:
 			seconds_per_tick = 2.0
 			damage_per_tick = 1.0
+		2, 3, 4:
+			set_radius(BASE_RADIUS + (level - 1) * 15)
 
 func _ready():
 	seconds_per_tick = 0.5

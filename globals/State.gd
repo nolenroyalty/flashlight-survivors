@@ -178,10 +178,10 @@ func upgrade_text(upgrade):
 	match upgrade:
 		Upgrade.Lamp:
 			match lamp_level:
-				0: return "see a little more around you"
-				1: return "see a little more around you"
-				2: return "see a lot more around you"
-				3: return "slowly damage enemies that are close by"
+				0: return "lamp damages enemies around you"
+				1: return "a somewhat bigger lamp to damage enemies around you"
+				2: return "a bigger lamp to damage enemies around you"
+				3: return "a much bigger lamp to damage enemies around you"
 		Upgrade.Meatballs:
 			return "3 meatballs. vegetarian."
 		Upgrade.Fire:
