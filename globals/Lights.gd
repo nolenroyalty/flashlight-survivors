@@ -5,6 +5,8 @@ signal alarm_flash_set(value)
 const MAX_FIXED_LIGHTS = 5
 var FixedLight = preload("res://player/FixedLight.tscn")
 
+# Circle is only used by player and it's confusing, oops
+
 class Circle:
 	var pos = Vector2()
 	var tween = null
@@ -36,39 +38,16 @@ func set_alarm_flashing(value):
 	alarm_flashing = value
 	emit_signal("alarm_flash_set", value)
 
-func vec3_of_fixed_light(fl, viewport_size):
-	var pos = fl.position / viewport_size
-	var radius = fl.radius / viewport_size.x
-	return Vector3(pos.x, pos.y, radius)
-
-# I mean this doesn't really belong here but whatever
-func add_fixed_light(pos, radius):
-	fading_lights[fixed_light_idx] = fixed_lights[fixed_light_idx]
-	var dupe = fading_lights[fixed_light_idx]
-
-	var fl = FixedLight.instance()
-	# Ahhhh this is b ad
-	get_tree().get_current_scene().add_child(fl)
-	fl.position = pos
-	fl.radius = 0.0
-	fixed_lights[fixed_light_idx] = fl
-
-	var tween = get_tree().create_tween()
-	tween.set_trans(Tween.TRANS_CUBIC)
-	tween.set_ease(Tween.EASE_OUT)
-	tween.tween_property(fl, "radius", radius, 1.0)
-
-	if dupe != null and is_instance_valid(dupe):
-		dupe.fade(1.0)
-
-	fixed_light_idx = (fixed_light_idx + 1) % MAX_FIXED_LIGHTS
-
+func set_light(fl, idx):
+	fixed_lights[idx] = fl
 
 func vec3_or_zero(node, viewport_size):
 	if node == null or not is_instance_valid(node):
 		return Vector3(0, 0, 0)
 	else:
-		return vec3_of_fixed_light(node, viewport_size)
+		var pos = node.position / viewport_size
+		var radius = node.current_radius / viewport_size.x
+		return Vector3(pos.x, pos.y, radius)
 
 func get_all_lights(viewport_size):
 	var l = []

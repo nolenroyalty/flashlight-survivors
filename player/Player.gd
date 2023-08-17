@@ -44,10 +44,6 @@ func damage(amount):
 		t.tween_property(self, "invincible", false, 0.0)
 		State.decrease_health(amount)
 		
-func _process(_delta):
-	if Input.is_action_just_pressed("debug_emit_fixed_light"):
-		Lights.add_fixed_light(position, 35.0)
-
 func _ready():
 	Lights.player.pos = position
 	set_flashlight_direction()

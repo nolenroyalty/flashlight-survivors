@@ -5,6 +5,7 @@ signal health_set(amount)
 signal lamp_increased(level)
 signal alarm_enabled()
 signal add_trauma(amount)
+signal tracklights_enabled()
 
 const MAX_HEALTH = 10
 var player_health = MAX_HEALTH setget set_health_do_not_call
@@ -227,6 +228,8 @@ func apply_upgrade(upgrade):
 			fire_alarm_level = min(fire_alarm_level, max_fire_alarm_level)
 		Upgrade.TrackLighting:
 			track_lighting_level += 1
+			if track_lighting_level == 1:
+				emit_signal("tracklights_enabled")
 			track_lighting_level = min(track_lighting_level, max_track_lighting_level)
 		Upgrade.Explode:
 			explode_level += 1
