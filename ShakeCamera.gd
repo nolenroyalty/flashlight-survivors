@@ -20,7 +20,6 @@ func _ready():
 	current = true
 
 func add_trauma(amount):
-	print("trauma mama")
 	trauma = min(trauma + amount, 1.0)
 	
 func shake():
@@ -29,7 +28,6 @@ func shake():
 	rotation = max_roll * amount * noise.get_noise_2d(noise.seed, noise_y)
 	offset.x = max_offset.x * amount * noise.get_noise_2d(noise.seed*2, noise_y)
 	offset.y = max_offset.y * amount * noise.get_noise_2d(noise.seed*3, noise_y)
-	print("%s | %s | %s" % [rotation, offset.x, offset.y])
 
 func _process(delta):
 	if target:
