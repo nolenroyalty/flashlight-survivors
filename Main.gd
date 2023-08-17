@@ -25,7 +25,7 @@ func _ready():
 	var _ignore = State.connect("health_set", healthbar, "set_health")
 	xpbar.connect("reached_level", self, "on_reached_level")
 	healthbar.set_health(State.player_health)
-	State.connect("add_trauma", camera, "add_trauma")
+	_ignore = State.connect("add_trauma", camera, "add_trauma")
 	U.player = player
 	U.xpbar = xpbar
 	rng = RandomNumberGenerator.new()
