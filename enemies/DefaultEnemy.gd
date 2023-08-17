@@ -49,7 +49,6 @@ func die():
 		$AnimatedSprite.play("die")
 		anim.connect("animation_finished", self, "die_when_dead")
 	
-	
 func alive():
 	return state == S.ALIVE
 
