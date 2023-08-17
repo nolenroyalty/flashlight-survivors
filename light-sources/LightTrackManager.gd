@@ -15,20 +15,20 @@ func fire():
 	match State.track_lighting_level:
 		1:
 			num = 3
-			radius = 50
+			radius = 55
 		2:
 			num = 3
-			radius = 60
+			radius = 65
 		3:
 			num = 4
-			radius = 60
+			radius = 65
 		4:
 			num = 4
-			radius = 60
+			radius = 65
 			move_mult = 3
 		5:
 			num = 5
-			radius = 60
+			radius = 65
 			move_mult = 2
 
 	var xdelta = vec.x * radius * 2 * (num - 1)

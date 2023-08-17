@@ -25,7 +25,6 @@ func upgraded():
 	emit_signal("upgrade_chosen", upgrade)
 
 func _ready():
-	print(sprite, text, title)
 	sprite.texture = State.upgrade_icon(upgrade)
 	text.text = State.upgrade_text(upgrade)
 	title.text = State.upgrade_title(upgrade)

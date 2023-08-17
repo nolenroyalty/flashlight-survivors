@@ -7,7 +7,6 @@ func animation_finished(name):
 		call_deferred("queue_free")
 
 func damage_if_present(body):
-	print("EXPLODE AT %s" % body)
 	.damage_if_present(body)
 
 var pos = null
