@@ -21,7 +21,7 @@ func fire():
 		4:
 			num = 5
 			moving = true
-	
+
 	# holy magic numbers
 	var max_x = 25 + 500 - (vec.x * 2 * 50 * num)
 	var max_y = 500 - (vec.y * 2 * 50 * num)
