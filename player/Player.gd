@@ -12,6 +12,7 @@ func _physics_process(_delta):
 	var dir = Vector2(dx, dy).normalized()
 	var speed = SPEED * (1.0 + 0.2 * State.speed_level)
 	var _unused_velocity = move_and_slide(dir * speed)
+	$Playerproto.flip_h = dx < 0.0
 #	position += dir * SPEED * delta
 	Lights.player.pos = position
 	set_flashlight_direction()
@@ -19,7 +20,10 @@ func _physics_process(_delta):
 func set_flashlight_direction():
 	var pos = get_viewport().get_mouse_position()
 	var dir = position.direction_to(pos)
-	look_at(pos)
+	#dir.angle()
+	$Cone.look_at(pos)
+	$LightLamp.look_at(pos)
+	$Flashlight.rotation_degrees = rad2deg(dir.angle())
 	if dir != Lights.flashlight_direction:
 		Lights.flashlight_direction = dir
 	Lights.flashlight_direction = dir
