@@ -240,6 +240,11 @@ func should_explode():
 	
 	return rng.randf() < chance
 
+func door_should_collapse():
+	match drunkenness_level:
+		0: return false
+		1: return rng.randf() < 0.2
+		2: return rng.randf() < 0.4
 
 func _ready():
 	rng = RandomNumberGenerator.new()

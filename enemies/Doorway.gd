@@ -8,9 +8,6 @@ var enemies_to_spawn = 0
 var enemies_spawned = 0
 var rng : RandomNumberGenerator
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
 func stop_and_fade():
 	$Timer.stop()
 	var t = get_tree().create_tween()
@@ -35,7 +32,20 @@ func spawn_enemy():
 		print("BUG: spawn_enemy called when no enemies left to spawn")
 		stop_and_fade()
 
-# Called when the node enters the scene tree for the first time.
+func on_collapse_played(name):
+	if name == "collapse":
+		call_deferred("queue_free")
+
+var i_have_taken_damage = false
+func damage(_amount):
+	if i_have_taken_damage:
+		return
+	i_have_taken_damage = true
+	if State.door_should_collapse():
+		$Timer.stop()
+		anim.play("collapse")
+		anim.connect("animation_finished", self, "on_collapse_played")
+
 func _ready():
 	rng = RandomNumberGenerator.new()
 	rng.randomize()
