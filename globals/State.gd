@@ -48,7 +48,7 @@ var max_beam_width_level = 3
 var fire_alarm_level = 0
 var max_fire_alarm_level = 6
 var track_lighting_level = 0
-var max_track_lighting_level = 4
+var max_track_lighting_level = 5
 var explode_level = 0
 var max_explode_level = 3
 var speed_level = 0
@@ -140,9 +140,10 @@ func upgrade_title(upgrade):
 		Upgrade.Lamp:
 			match lamp_level:
 				0: return "NÄVLINGE"
-				1: return "HÅRSLINGA"
-				2: return "SOMMARLÅNKE"
-				3: return "OBEGRÄNSAD"
+				1: return "STRATOSFAR"
+				2: return "HÅRSLINGA"
+				3: return "SOMMARLÅNKE"
+				4: return "OBEGRÄNSAD"
 		Upgrade.Meatballs:
 			return "SWEDISH MEATBALLS"
 		Upgrade.Fire:
@@ -191,9 +192,10 @@ func upgrade_text(upgrade):
 		Upgrade.TrackLighting:
 			match track_lighting_level:
 				0: return "3 spotlights to zap your foes"
-				1: return "another spotlight means more zapping"
-				2: return "another spotlight means more zapping"
-				3: return "spotlights move around"
+				1: return "bigger spotlights catch more enemies"
+				2: return "a 4th spotlight to zap your foes"
+				3: return "spotlights travel much further"
+				4: return "a 5th spotlight to zap your foes"
 		Upgrade.Explode:
 			match explode_level:
 				0: return "powerful batteries occasionally cause explosions"

@@ -6,38 +6,44 @@ var rng : RandomNumberGenerator
 
 func fire():
 	var num = 0
-	var moving = false
 	var x = rng.randf()
 	var y = 1.0 - x
+	var radius = 55
 	var vec = Vector2(x, y)
+	var move_mult = 1
 
 	match State.track_lighting_level:
 		1:
 			num = 3
+			radius = 50
 		2:
-			num = 4
+			num = 3
+			radius = 60
 		3:
-			num = 5
+			num = 4
+			radius = 60
 		4:
+			num = 4
+			radius = 60
+			move_mult = 3
+		5:
 			num = 5
-			moving = true
+			radius = 60
+			move_mult = 2
 
-	# holy magic numbers
-	var max_x = 25 + 500 - (vec.x * 2 * 50 * num)
-	var max_y = 500 - (vec.y * 2 * 50 * num)
-	if moving:
-		max_x -= 50 * vec.x
-		max_y -= 50 * vec.y
-		max_x = max(max_x, 0)
-		max_y = max(max_y, 0)
+	var xdelta = vec.x * radius * 2 * (num - 1)
+	var ydelta = vec.y * radius * 2 * (num - 1)
 
-	var x_start = rng.randi_range(50 / 2, max_x)
-	var y_start = rng.randi_range(Constants.MIN_Y_ON_SCREEN, max_y)
+	var maxx = max(5, 500 - xdelta)
+	var maxy = max(Constants.MIN_Y_ON_SCREEN + 5, 500 - ydelta)
+	
+	var x_start = rng.randi_range(5, maxx)
+	var y_start = rng.randi_range(Constants.MIN_Y_ON_SCREEN, maxy)
 	var start = U.v(x_start, y_start)
 
 	for i in range(num):
 		var il = IndividualLight.instance()
-		il.init(start, i, vec, moving)
+		il.init(start, move_mult, i, vec, radius)
 		add_child(il)
 
 func enable():

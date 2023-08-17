@@ -3,19 +3,20 @@ extends LightSource
 const FADE_IN = 1.0
 const FADE_OUT = 1.0
 const LIFETIME = 2.0
-const MAX_RADIUS = 55
 const MOVE_DISTANCE = 100
 
 var current_radius = 0 setget set_current_radius
-var move = false
+var max_radius : int
 var vector : Vector2
 var idx = 0
+var move_mult
 
-func init(base_pos, idx_, vector_, move_):
+func init(base_pos, move_mult_, idx_, vector_, max_radius_):
+	max_radius = max_radius_
 	vector = vector_
 	idx = idx_
-	position = base_pos + idx * vector * MAX_RADIUS * 2.0
-	move = move_
+	move_mult = move_mult_
+	position = base_pos + idx * vector * max_radius * 2.0
 
 func set_current_radius(value):
 	current_radius = value
@@ -30,18 +31,15 @@ func _ready():
 	var tween = get_tree().create_tween()
 	tween.set_trans(Tween.TRANS_CUBIC)
 	tween.set_ease(Tween.EASE_OUT)
-	tween.tween_property(self, "current_radius", MAX_RADIUS, FADE_IN)
+	tween.tween_property(self, "current_radius", max_radius, FADE_IN)
 
-	if move:
-		var tangent = vector.tangent()
-		var mult = 1
-		if idx % 2 == 0:
-			mult = -1
-		tween.tween_property(self, "position", position + tangent * mult * MOVE_DISTANCE, LIFETIME / 4)
-		tween.tween_property(self, "position", position + tangent * mult * -1 * MOVE_DISTANCE, LIFETIME / 2)
-		tween.tween_property(self, "position", position, LIFETIME / 4)
-	else:
-		tween.tween_interval(LIFETIME)
-	
+	var tangent = vector.tangent()
+	var mult = move_mult
+	if idx % 2 == 0:
+		mult *= -1
+	tween.tween_property(self, "position", position + tangent * mult * MOVE_DISTANCE, LIFETIME / 4)
+	tween.tween_property(self, "position", position + tangent * mult * -1 * MOVE_DISTANCE, LIFETIME / 2)
+	tween.tween_property(self, "position", position, LIFETIME / 4)
+
 	tween.tween_property(self, "current_radius", 0, FADE_OUT)
 	tween.tween_callback(self, "call_deferred", ["queue_free"])
