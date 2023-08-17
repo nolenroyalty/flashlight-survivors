@@ -33,8 +33,9 @@ func maybe_explode():
 	var exploded = State.should_explode()
 	if exploded:
 		var explosion = Explosion.instance()
-		get_parent().add_child(explosion)
+		# explosion.init(position)
 		explosion.position = position
+		get_parent().call_deferred("add_child", explosion)
 		return true
 	return false
 
@@ -45,10 +46,10 @@ func die():
 		call_deferred("queue_free")
 	else:
 		anim.play("die")
+		$AnimatedSprite.play("die")
 		anim.connect("animation_finished", self, "die_when_dead")
 	
 	
-
 func alive():
 	return state == S.ALIVE
 

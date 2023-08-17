@@ -19,6 +19,7 @@ func damage_if_present(body):
 		start_damage_timer(body)
 
 func entered(area):
+	print("%s entered %s" % [area, self])
 	var body = area.get_parent()
 	bodies[body] = true 
 	start_damage_timer(body)

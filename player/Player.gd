@@ -33,12 +33,14 @@ func damage(amount):
 	else:
 		invincible = true
 		var t = get_tree().create_tween()
-		var t2 = get_tree().create_tween()
+		# var t2 = get_tree().create_tween()
 		var duration = iframe_duration / 2.0
-		t.tween_property(self, "modulate:a", 0.25, duration)
-		t2.tween_property(self, "scale", U.v(0.75, 0.75), duration)
-		t2.tween_property(self, "scale", U.v(1.0, 1.0), duration)
-		t.tween_property(self, "modulate:a", 1.0, duration)
+		t.tween_property(self, "modulate:a", 0.1, 1.5 * duration)
+		t.set_ease(Tween.EASE_OUT)
+		t.set_trans(Tween.TRANS_QUAD)
+		# t2.tween_property(self, "scale", U.v(0.75, 0.75), duration)
+		# t2.tween_property(self, "scale", U.v(1.0, 1.0), duration)
+		t.tween_property(self, "modulate:a", 1.0, 0.5 * duration)
 		t.tween_property(self, "invincible", false, 0.0)
 		State.decrease_health(amount)
 		

@@ -241,7 +241,7 @@ func apply_upgrade(upgrade):
 			number_of_big_totes += 1
 
 func should_explode():
-	var chance = 0.05 * explode_level
+	var chance = 0.15 * explode_level
 	if chance > 0.0:
 		chance += 0.05
 	

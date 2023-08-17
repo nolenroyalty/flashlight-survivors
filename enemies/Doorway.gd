@@ -7,6 +7,7 @@ var DefaultEnemy = preload("res://enemies/DefaultEnemy.tscn")
 var enemies_to_spawn = 0
 var enemies_spawned = 0
 var rng : RandomNumberGenerator
+var xp_gain = 25
 
 func stop_and_fade():
 	$Timer.stop()
@@ -42,6 +43,7 @@ func damage(_amount):
 		return
 	i_have_taken_damage = true
 	if State.door_should_collapse():
+		U.xpbar.add_xp(xp_gain)
 		$Timer.stop()
 		anim.play("collapse")
 		anim.connect("animation_finished", self, "on_collapse_played")
