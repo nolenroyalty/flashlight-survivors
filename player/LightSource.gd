@@ -19,7 +19,6 @@ func damage_if_present(body):
 		start_damage_timer(body)
 
 func entered(area):
-	print("%s entered %s" % [area, self])
 	var body = area.get_parent()
 	bodies[body] = true 
 	start_damage_timer(body)
@@ -31,7 +30,5 @@ func exited(area):
 	bodies.erase(body)
 
 func _ready():
-	# var _ignore = connect("body_entered", self, "on_body_entered")
-	# _ignore = connect("body_exited", self, "on_body_exited")
 	var _ignore = connect("area_entered", self, "entered")
 	_ignore = connect("area_exited", self, "exited")

@@ -1,5 +1,7 @@
 extends Node2D
 
+signal despawned()
+
 onready var anim = $AnimationPlayer
 
 var DefaultEnemy = preload("res://enemies/DefaultEnemy.tscn")
@@ -9,13 +11,17 @@ var enemies_spawned = 0
 var rng : RandomNumberGenerator
 var xp_gain = 25
 
+func free_and_signal():
+	emit_signal("despawned")
+	call_deferred("queue_free")
+
 func stop_and_fade():
 	$Timer.stop()
 	var t = get_tree().create_tween()
 	t.tween_property(self, "scale", U.v(0.1, 0.9), 0.4)
 	t.set_ease(Tween.EASE_IN)
 	t.set_trans(Tween.TRANS_QUAD)
-	t.tween_callback(self, "queue_free")
+	t.tween_callback(self, "free_and_signal")
 
 func spawn_enemy():
 	if enemies_spawned < enemies_to_spawn:
@@ -35,7 +41,7 @@ func spawn_enemy():
 
 func on_collapse_played(name):
 	if name == "collapse":
-		call_deferred("queue_free")
+		free_and_signal()
 
 var i_have_taken_damage = false
 func damage(_amount):

@@ -1,0 +1,47 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://enemies/SpawnManager.gd" type="Script" id=1]
+
+[node name="SpawnManager" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="DoorPoints" type="Node2D" parent="."]
+
+[node name="Point1" type="Node2D" parent="DoorPoints"]
+position = Vector2( 77, 104 )
+
+[node name="Point2" type="Node2D" parent="DoorPoints"]
+position = Vector2( 208, 103 )
+
+[node name="Point3" type="Node2D" parent="DoorPoints"]
+position = Vector2( 353, 80 )
+
+[node name="Point4" type="Node2D" parent="DoorPoints"]
+position = Vector2( 447, 149 )
+
+[node name="Point5" type="Node2D" parent="DoorPoints"]
+position = Vector2( 314, 214 )
+
+[node name="Point6" type="Node2D" parent="DoorPoints"]
+position = Vector2( 129, 209 )
+
+[node name="Point7" type="Node2D" parent="DoorPoints"]
+position = Vector2( 64, 338 )
+
+[node name="Point8" type="Node2D" parent="DoorPoints"]
+position = Vector2( 201, 311 )
+
+[node name="Point9" type="Node2D" parent="DoorPoints"]
+position = Vector2( 398, 336 )
+
+[node name="Point10" type="Node2D" parent="DoorPoints"]
+position = Vector2( 321, 417 )
+
+[node name="Point11" type="Node2D" parent="DoorPoints"]
+position = Vector2( 431, 437 )
+
+[node name="Point12" type="Node2D" parent="DoorPoints"]
+position = Vector2( 162, 405 )
+
+[node name="Point13" type="Node2D" parent="DoorPoints"]
+position = Vector2( 74, 453 )
