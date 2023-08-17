@@ -25,7 +25,11 @@ func fire():
 	# holy magic numbers
 	var max_x = 25 + 500 - (vec.x * 2 * 50 * num)
 	var max_y = 500 - (vec.y * 2 * 50 * num)
-	#max_y = min(max_y, Constants.UPPER_BOUND)
+	if moving:
+		max_x -= 50 * vec.x
+		max_y -= 50 * vec.y
+		max_x = max(max_x, 0)
+		max_y = max(max_y, 0)
 
 	var x_start = rng.randi_range(50 / 2, max_x)
 	var y_start = rng.randi_range(Constants.MIN_Y_ON_SCREEN, max_y)

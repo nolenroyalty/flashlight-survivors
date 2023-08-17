@@ -3,7 +3,6 @@ extends Node2D
 signal alarm_flash_set(value)
 
 const MAX_FIXED_LIGHTS = 5
-var FixedLight = preload("res://player/FixedLight.tscn")
 
 # Circle is only used by player and it's confusing, oops
 

@@ -10,9 +10,11 @@ const float PI = 3.1415926;
 const float MAX_DISTANCE = 1.414;
 
 uniform float max_darkness = 1.0;
+uniform vec4 color_mix = vec4(vec3(1), 1);
 uniform float beam_width_measured_in_distance_behind_player = 0.15;
 // This is a lie, we want PI / 12 but the shader won't let us do that at compile time
 uniform float light_cone_angle = 1.0;
+
 
 uniform vec2 flashlight_direction = vec2(1.0, 0.0);
 uniform vec3 player;
@@ -108,6 +110,7 @@ void fragment () {
 [sub_resource type="ShaderMaterial" id=2]
 shader = SubResource( 1 )
 shader_param/max_darkness = 1.0
+shader_param/color_mix = Plane( 1, 1, 1, 1 )
 shader_param/beam_width_measured_in_distance_behind_player = 0.15
 shader_param/light_cone_angle = 1.0
 shader_param/flashlight_direction = Vector2( 1, 0 )
