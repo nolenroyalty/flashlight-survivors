@@ -1,6 +1,4 @@
 extends Node2D
-var Enemy = preload("res://enemies/DefaultEnemy.tscn")
-var Door = preload("res://enemies/Doorway.tscn")
 var UpgradeDialogue = preload("res://ui/UpgradeDialogue.tscn")
 
 onready var player = $Player
@@ -30,10 +28,3 @@ func _ready():
 	U.xpbar = xpbar
 	rng = RandomNumberGenerator.new()
 	rng.randomize()
-
-func _process(_delta):
-	if Input.is_action_just_pressed("debug_spawn_enemy"):
-		var enemy = Enemy.instance()
-		add_child(enemy)
-
-
