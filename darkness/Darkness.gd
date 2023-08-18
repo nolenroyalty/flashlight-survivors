@@ -27,7 +27,8 @@ func handle_alarm_flash(alarm_on):
 
 
 func _process(_delta):
-	var viewport_size = U.to_shader_coords(get_viewport().get_size())
+	# var viewport_size = U.to_shader_coords(get_viewport().get_size())
+	var viewport_size = Constants.SCREEN_SIZE
 	$Sprite.material.set_shader_param("player", Lights.player.to_vec3(viewport_size))
 	
 	var idx = 1
