@@ -48,10 +48,13 @@ func damage(amount):
 	else:
 		play_damage_animation()
 
-		
+
+func actually_damage():
+	U.player.damage(power)
+
 func deal_damage_if_touching():
 	if not is_dead and touching_player:
-		U.player.damage(power)
+		actually_damage()
 		var timer = get_tree().create_timer(seconds_per_attack, false)
 		timer.connect("timeout", self, "deal_damage_if_touching")
 
@@ -81,5 +84,5 @@ func play_spawn_animation():
 func _ready():
 	var _ignore = $Hitbox.connect("area_entered", self, "on_touched_player")
 	_ignore = $Hitbox.connect("area_exited", self, "on_stopped_touching_player")
-	scale = U.v(0.1, 0.1)
+	# scale = U.v(0.1, 0.1)
 	play_spawn_animation()

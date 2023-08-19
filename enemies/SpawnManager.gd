@@ -1,8 +1,10 @@
 extends Node2D
 
 var Doorway = preload("res://enemies/Doorway.tscn")
+var Puddle = preload("res://enemies/PuddleGuy.tscn")
 
 var can_spawn_a_door_here = {}
+var can_spawn_a_puddle_here = {}
 var rng : RandomNumberGenerator
 onready var timer = $Timer
 
@@ -26,6 +28,27 @@ func spawn_door():
 	add_child(door)
 	return true
 
+func puddle_despawned(point):
+	can_spawn_a_puddle_here[point] = true
+
+func spawn_puddle():
+	var choices = []
+	for point in can_spawn_a_puddle_here.keys():
+		if can_spawn_a_puddle_here[point]:
+			choices.append(point)
+	
+	if len(choices) == 0:
+		return false
+	
+	var chosen_point = choices[rng.randi() % len(choices)]
+	can_spawn_a_puddle_here[chosen_point] = false
+	var puddle = Puddle.instance()
+	puddle.position = chosen_point
+	puddle.connect("despawned", self, "puddle_despawned", [chosen_point])
+	add_child(puddle)
+	return true
+
+
 func door_spawn_chance_increment():
 	if State.player_level < 5: return 0.05
 	elif State.player_level < 15: return 0.1
@@ -48,6 +71,11 @@ func _process(_delta):
 			print("door spawned")
 		else:
 			print("could not spawn door")
+	if Input.is_action_just_pressed("debug_spawn_puddle"):
+		if spawn_puddle():
+			print("puddle spawned")
+		else:
+			print("could not spawn puddle")
 
 func _ready():
 	rng = RandomNumberGenerator.new()
@@ -56,4 +84,7 @@ func _ready():
 	for child in $DoorPoints.get_children():
 		can_spawn_a_door_here[child.position] = true
 	
+	for child in $PuddlePoints.get_children():
+		can_spawn_a_puddle_here[child.position] = true
+
 	timer.connect("timeout", self, "maybe_spawn")
