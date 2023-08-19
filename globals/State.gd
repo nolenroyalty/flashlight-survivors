@@ -39,7 +39,7 @@ var IconTrack = preload("res://Aseprite/tracklighting1.png")
 var IconExplode = preload("res://Aseprite/battery.png")
 var IconSpeed = preload("res://Aseprite/grease.png")
 var IconDrunk = preload("res://Aseprite/booze.png")
-var IconTote = preload("res://Aseprite/booze.png")
+var IconTote = preload("res://Aseprite/ikebag.png")
 
 var lamp_level = 0
 var max_lamp_level = 4
@@ -140,10 +140,9 @@ func upgrade_title(upgrade):
 		Upgrade.Lamp:
 			match lamp_level:
 				0: return "NÄVLINGE"
-				1: return "STRATOSFAR"
-				2: return "HÅRSLINGA"
-				3: return "SOMMARLÅNKE"
-				4: return "OBEGRÄNSAD"
+				1: return "HÅRSLINGA"
+				2: return "SOMMARLÅNKE"
+				3: return "OBEGRÄNSAD"
 		Upgrade.Meatballs:
 			return "SWEDISH MEATBALLS"
 		Upgrade.Fire:
@@ -156,7 +155,8 @@ func upgrade_title(upgrade):
 				0: return "TROSS"
 				1: return "NYMÅNE"
 				2: return "STRATOSFÄR"
-				3: return "HAUNTED STRATOSFÄR"
+				3: return "TIDIG"
+				4: return "BAVE"
 		Upgrade.Explode:
 			match explode_level:
 				0: return "LADDA"

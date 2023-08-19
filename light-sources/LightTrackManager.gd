@@ -5,6 +5,7 @@ onready var timer = $Timer
 var rng : RandomNumberGenerator
 
 func fire():
+	$Audio.playing = true
 	var num = 0
 	var x = rng.randf()
 	var y = 1.0 - x

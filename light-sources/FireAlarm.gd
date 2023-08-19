@@ -19,6 +19,7 @@ func stop_flashing():
 
 func flash():
 	collider.disabled = false
+	$Audio.playing = true
 	var t = get_tree().create_tween()
 	Lights.set_alarm_flashing(true)
 	t.tween_callback(self, "stop_flashing").set_delay(FLASH_TIME)
