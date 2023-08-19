@@ -5,6 +5,7 @@ signal despawned()
 onready var anim = $AnimationPlayer
 
 var Ghost = preload("res://enemies/Ghost.tscn")
+var Spider = preload("res://enemies/Spider.tscn")
 
 var enemies_to_spawn = 0
 var enemies_spawned = 0
@@ -29,7 +30,7 @@ func spawn_enemy():
 		t.tween_property(self, "scale", U.v(1.2, 1.0), 0.3)
 		t.tween_property(self, "scale", U.v(1.0, 1.0), 0.3)
 		t.set_trans(Tween.TRANS_QUAD)
-		var enemy = Ghost.instance()
+		var enemy = Spider.instance()
 		get_parent().add_child(enemy)
 		enemy.position = position
 		enemies_spawned += 1
