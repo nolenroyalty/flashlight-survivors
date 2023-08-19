@@ -3,7 +3,7 @@ extends BaseEnemy
 onready var sprite = $AnimatedSprite
 onready var roll_safeguard_timer = $RollSafeguard
 
-enum S { UNROLL, LOOK, START_ROLL, ROLLING }
+enum S { UNROLL, LOOK, START_ROLL, ROLLING, DYING }
 var state = S.UNROLL
 var roll_destination : Vector2
 const SPEED = 200
@@ -25,7 +25,7 @@ func finished_rolling():
 
 func _physics_process(delta):
 	if state == S.ROLLING:
-		if position.distance_to(roll_destination) < 10:
+		if position.distance_to(roll_destination) < 20:
 			finished_rolling()
 		else:
 			var dir = position.direction_to(roll_destination)
@@ -37,6 +37,16 @@ func roll_safeguard_fired():
 	if state == S.ROLLING:
 		print("%s roll safeguard fired: stopping roll" % self)
 		finished_rolling()
+
+func handle_death():
+	match state:
+		S.ROLLING:
+			sprite.play("die roll")
+		S.UNROLL, S.START_ROLL, S.LOOK:
+			sprite.play("die legs")
+		S.DYING:
+			print("BUG: handle_death called when already dying")
+	state = S.DYING
 
 func animation_finished():
 	match state:
@@ -53,6 +63,8 @@ func animation_finished():
 			sprite.play("roll")
 		S.ROLLING:
 			pass
+		S.DYING:
+			call_deferred("queue_free")
 			
 func unroll_finished():
 	sprite.play("look")
@@ -73,6 +85,8 @@ func spawn():
 func _ready():
 	randomize()
 	health = 10
+	power = 2
+	xp_gain = 5
 	sprite.connect("animation_finished", self, "animation_finished")
 	roll_safeguard_timer.connect("timeout", self, "roll_safeguard_fired")
 	spawn()
