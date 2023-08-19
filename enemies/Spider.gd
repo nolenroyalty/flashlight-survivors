@@ -6,15 +6,20 @@ onready var roll_safeguard_timer = $RollSafeguard
 enum S { UNROLL, LOOK, START_ROLL, ROLLING, DYING }
 var state = S.UNROLL
 var roll_destination : Vector2
+var initial_move_direction
 const SPEED = 200
 const ROTATIONS_A_SECOND = 1
+
+func clamp_x(x):
+	return min(max(x, 25), 475)
+
+func clamp_y(y):
+	return min(max(y, Constants.MIN_Y_ON_SCREEN + 25), 475)
 
 func pick_roll_destiation():
 	var x = U.player.position.x + rand_range(-50, 50)
 	var y = U.player.position.y + rand_range(-50, 50)
-	x = min(max(x, 25), 475)
-	y = min(max(y, Constants.MIN_Y_ON_SCREEN + 25), 475)
-	roll_destination = U.v(x, y)
+	roll_destination = U.v(clamp_x(x), clamp_y(y))
 
 func finished_rolling():
 	roll_safeguard_timer.stop()
@@ -24,6 +29,9 @@ func finished_rolling():
 	sprite.play("stop roll")
 
 func _physics_process(delta):
+	if state == S.UNROLL and initial_move_direction != null:
+		var _v = move_and_slide(initial_move_direction * SPEED / 2.0)
+
 	if state == S.ROLLING:
 		if position.distance_to(roll_destination) < 20:
 			finished_rolling()
@@ -53,6 +61,7 @@ func animation_finished():
 		S.UNROLL:
 			state = S.LOOK
 			sprite.play("look")
+			initial_move_direction = null
 		S.LOOK:
 			state = S.START_ROLL
 			sprite.play("start roll")
@@ -72,6 +81,12 @@ func unroll_finished():
 func play_spawn_animation():
 	pass
 
+func maybe_neg():
+	if rand_range(0, 1) == 0:
+		return -1
+	else:
+		return 1
+
 func spawn():
 	scale = U.v(0.1, 0.6)
 	var t = get_tree().create_tween()
@@ -81,6 +96,10 @@ func spawn():
 	t.set_trans(Tween.TRANS_QUAD)
 	sprite.play("stop roll")
 	t.tween_callback(self, "unroll_finished")
+
+	var dx = randf() * maybe_neg()
+	var dy = randf() * maybe_neg()
+	initial_move_direction = Vector2(dx, dy).normalized()
 
 func _ready():
 	randomize()
