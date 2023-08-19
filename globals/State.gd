@@ -39,7 +39,7 @@ var IconTrack = preload("res://Aseprite/tracklighting1.png")
 var IconExplode = preload("res://Aseprite/battery.png")
 var IconSpeed = preload("res://Aseprite/grease.png")
 var IconDrunk = preload("res://Aseprite/booze.png")
-var IconTote = preload("res://Aseprite/booze.png")
+var IconTote = preload("res://Aseprite/ikebag.png")
 
 var lamp_level = 0
 var max_lamp_level = 4

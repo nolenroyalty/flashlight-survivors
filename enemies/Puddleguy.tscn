@@ -335,7 +335,6 @@ tracks/11/keys = {
 }
 
 [node name="Puddleguy" instance=ExtResource( 1 )]
-position = Vector2( 100, 100 )
 script = ExtResource( 3 )
 
 [node name="Hit" type="CollisionShape2D" parent="Hitbox" index="0"]

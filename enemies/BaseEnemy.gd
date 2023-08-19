@@ -2,6 +2,8 @@ extends KinematicBody2D
 class_name BaseEnemy
 
 var Explosion = preload("res://light-sources/Explosion.tscn")
+var sound_ding = preload("res://sounds/kill1.wav")
+
 var is_dead = false
 var health = 1
 var touching_player = false

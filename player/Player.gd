@@ -34,6 +34,7 @@ func damage(amount):
 	if invincible:
 		return
 	else:
+		$Audio.playing = true
 		invincible = true
 		var t = get_tree().create_tween()
 		var duration = iframe_duration / 2.0
