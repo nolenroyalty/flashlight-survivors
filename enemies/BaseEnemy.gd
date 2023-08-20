@@ -28,14 +28,14 @@ func die():
 	is_dead = true
 	U.xpbar.add_xp(xp_gain)
 	if maybe_explode():
+		AudioManager.play_explode()
 		call_deferred("queue_free")
 	else:
+		AudioManager.play_death()
 		handle_death()
 
 func play_damage_animation():
 	var t = get_tree().create_tween()
-	# t.tween_property(self, "modulate", Color("#645f678e"), 0.35)
-	# t.tween_property(self, "modulate", Color("#dd30408c"), 0.35)
 	t.tween_property(self, "modulate", Color("#99d8b47a"), 0.15)
 	t.tween_property(self, "modulate", Color("#ffffff"), 0.15)
 	t.set_trans(Tween.TRANS_QUAD)

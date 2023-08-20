@@ -4,6 +4,7 @@ signal finished()
 
 onready var choice_holder = $Background/ChoiceHolder
 onready var congrats = $Background/CongratsLabel
+onready var audio = $Audio
 
 var UpgradeChoice = preload("res://ui/UpgradeChoice.tscn")
 var rng : RandomNumberGenerator
@@ -13,6 +14,7 @@ func on_upgrade_chosen(upgrade):
 	emit_signal("finished")
 
 func _ready():
+	audio.play()
 	$AnimationPlayer.play("shwoop")
 	congrats.text = "Reached level %d!" % [State.player_level]
 

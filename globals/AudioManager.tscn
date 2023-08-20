@@ -1,0 +1,40 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://sounds/Retro Blop 18.wav" type="AudioStream" id=1]
+[ext_resource path="res://globals/AudioManager.gd" type="Script" id=2]
+[ext_resource path="res://sounds/Retro Blop 22.wav" type="AudioStream" id=3]
+
+[node name="AudioManager" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="DeathAudios" type="Node2D" parent="."]
+
+[node name="DeathAudio1" type="AudioStreamPlayer" parent="DeathAudios"]
+stream = ExtResource( 1 )
+volume_db = -5.0
+
+[node name="DeathAudio2" type="AudioStreamPlayer" parent="DeathAudios"]
+stream = ExtResource( 1 )
+volume_db = -5.0
+
+[node name="DeathAudio3" type="AudioStreamPlayer" parent="DeathAudios"]
+stream = ExtResource( 1 )
+volume_db = -5.0
+
+[node name="ExplodeAudios" type="Node2D" parent="."]
+
+[node name="ExplodeAudio1" type="AudioStreamPlayer" parent="ExplodeAudios"]
+stream = ExtResource( 3 )
+volume_db = -5.0
+
+[node name="ExplodeAudio2" type="AudioStreamPlayer" parent="ExplodeAudios"]
+stream = ExtResource( 3 )
+volume_db = -5.0
+
+[node name="ExplodeAudio3" type="AudioStreamPlayer" parent="ExplodeAudios"]
+stream = ExtResource( 3 )
+volume_db = -5.0
+
+[node name="ExplodeAudio4" type="AudioStreamPlayer" parent="ExplodeAudios"]
+stream = ExtResource( 3 )
+volume_db = -5.0

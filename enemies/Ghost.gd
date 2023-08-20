@@ -19,4 +19,5 @@ func _physics_process(_delta):
 
 func _ready():
 	health = 3
+	xp_gain = 3
 

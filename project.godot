@@ -36,6 +36,7 @@ U="*res://globals/Utilities.tscn"
 Lights="*res://globals/Lights.tscn"
 State="*res://globals/State.tscn"
 Constants="*res://globals/Constants.tscn"
+AudioManager="*res://globals/AudioManager.tscn"
 
 [display]
 

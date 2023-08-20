@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://ui/UpgradeDialogue.gd" type="Script" id=1]
 [ext_resource path="res://Aseprite/upgradebackground.png" type="Texture" id=2]
 [ext_resource path="res://Aseprite/particle1.png" type="Texture" id=3]
+[ext_resource path="res://sounds/Retro Event StereoUP 02.wav" type="AudioStream" id=4]
 
 [sub_resource type="Animation" id=2]
 length = 0.001
@@ -295,3 +296,7 @@ align = 1
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 2 )
 anims/shwoop = SubResource( 1 )
+
+[node name="Audio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+volume_db = -7.0

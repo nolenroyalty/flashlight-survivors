@@ -9,7 +9,7 @@ var xp = 0
 
 func xp_required():
 	# Come back and fix this
-	return 15 + 10 * (State.player_level -1 )
+	return 15 + 10 * (State.player_level - 1)
 
 func set_foreground_scale():
 	var req = xp_required()

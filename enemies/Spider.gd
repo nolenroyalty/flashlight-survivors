@@ -105,7 +105,7 @@ func _ready():
 	randomize()
 	health = 10
 	power = 2
-	xp_gain = 5
+	xp_gain = 6
 	sprite.connect("animation_finished", self, "animation_finished")
 	roll_safeguard_timer.connect("timeout", self, "roll_safeguard_fired")
 	spawn()
