@@ -47,6 +47,7 @@ func reset_everything():
 	$ShakeCamera.reset()
 	State.reset()
 	xpbar.reset()
+	$FireAlarm.reset()
 	healthbar.set_health(State.player_health)
 	$LightTrackManager.disable()
 	$SpawnManager.disable()

@@ -25,6 +25,10 @@ func flash():
 	t.tween_callback(self, "stop_flashing").set_delay(FLASH_TIME)
 	timer.start(calculate_wait_time())
 
+func reset():
+	timer.stop()
+	stop_flashing()
+
 func _ready():
 	var _ignore = State.connect("alarm_enabled", self, "handle_enable")
 	timer.connect("timeout", self, "flash")
