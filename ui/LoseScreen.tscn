@@ -1,0 +1,233 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://fonts/BasicHandwriting.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://ui/LoseScreen.gd" type="Script" id=2]
+[ext_resource path="res://sounds/Retro Negative Short 23.wav" type="AudioStream" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 40
+font_data = ExtResource( 1 )
+
+[sub_resource type="StyleBoxEmpty" id=4]
+
+[sub_resource type="StyleBoxEmpty" id=5]
+
+[sub_resource type="StyleBoxEmpty" id=6]
+
+[sub_resource type="StyleBoxEmpty" id=7]
+
+[sub_resource type="StyleBoxEmpty" id=8]
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Top:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -250 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Bottom:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 500 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Bottom/ScoreLabel:visible_characters")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Bottom/ScoreLabel:percent_visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Bottom/Button:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Bottom/Button:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "scroll-in"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Top:rect_position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.7, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -350 ), Vector2( 0, -100 ), Vector2( 0, -100 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Bottom:rect_position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.7, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 500 ), Vector2( 0, 200 ), Vector2( 0, 200 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Bottom/ScoreLabel:percent_visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.9, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 1.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Bottom/Button:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Bottom/Button:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0.9, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[node name="LoseScreen" type="CanvasLayer"]
+pause_mode = 2
+script = ExtResource( 2 )
+
+[node name="Top" type="ColorRect" parent="."]
+margin_top = -250.0
+margin_right = 500.0
+margin_bottom = 50.0
+color = Color( 0.105882, 0.105882, 0.0901961, 1 )
+
+[node name="Label" type="Label" parent="Top"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -47.0
+margin_bottom = -7.0
+custom_colors/font_color = Color( 0.92549, 0.85098, 0.839216, 1 )
+custom_fonts/font = SubResource( 1 )
+text = "Boo"
+align = 1
+
+[node name="Bottom" type="ColorRect" parent="."]
+margin_top = 500.0
+margin_right = 500.0
+margin_bottom = 1000.0
+color = Color( 0.105882, 0.105882, 0.0901961, 1 )
+
+[node name="Label2" type="Label" parent="Bottom"]
+anchor_right = 1.0
+margin_top = 6.0
+margin_bottom = 89.0
+custom_colors/font_color = Color( 0.92549, 0.85098, 0.839216, 1 )
+custom_fonts/font = SubResource( 1 )
+text = "Hoo"
+align = 1
+
+[node name="ScoreLabel" type="Label" parent="Bottom"]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = -143.0
+margin_bottom = -89.0
+custom_colors/font_color = Color( 0.92549, 0.85098, 0.839216, 1 )
+text = "Reached level 5
+Survived 10 seconds
+Found 0 iconic totes"
+align = 1
+percent_visible = 0.0
+
+[node name="Button" type="Button" parent="Bottom"]
+visible = false
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -47.5
+margin_top = -271.0
+margin_right = 47.5
+margin_bottom = -249.0
+custom_colors/font_color = Color( 0.92549, 0.85098, 0.839216, 1 )
+custom_styles/hover = SubResource( 4 )
+custom_styles/pressed = SubResource( 5 )
+custom_styles/focus = SubResource( 6 )
+custom_styles/disabled = SubResource( 7 )
+custom_styles/normal = SubResource( 8 )
+text = "Play Again"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 2 )
+anims/scroll-in = SubResource( 3 )
+
+[node name="Audio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+volume_db = -10.0

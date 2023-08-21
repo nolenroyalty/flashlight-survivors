@@ -4,9 +4,14 @@ export (int)var SPEED = 100
 var myidx = 2;
 var invincible = false
 var iframe_duration = 1.25
+var dead = false
+var itween = null
 
 # Need to prevent moving outside of the screen!
 func _physics_process(_delta):
+	if dead:
+		return
+	
 	var dx = Input.get_action_strength("player_right") - Input.get_action_strength("player_left")
 	var dy = Input.get_action_strength("player_down") - Input.get_action_strength("player_up")
 	var dir = Vector2(dx, dy).normalized()
@@ -30,6 +35,12 @@ func set_flashlight_direction():
 func set_not_invincible():
 	invincible = false
 
+func reset(pos):
+	position = pos
+	invincible = false
+	if itween:
+		itween.kill()
+
 func damage(amount):
 	if invincible:
 		return
@@ -43,6 +54,7 @@ func damage(amount):
 		t.set_trans(Tween.TRANS_QUAD)
 		t.tween_property(self, "modulate:a", 1.0, 0.5 * duration)
 		t.tween_property(self, "invincible", false, 0.0)
+		itween = t
 		State.decrease_health(amount)
 		
 func _ready():

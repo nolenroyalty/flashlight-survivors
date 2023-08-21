@@ -13,6 +13,12 @@ func play_explode():
 	explode_audios[explode_idx].play()
 	explode_idx = (explode_idx + 1) % len(explode_audios)
 
+func stop_all():
+	for audio in death_audios:
+		audio.stop()
+	for audio in explode_audios:
+		audio.stop()
+
 func _ready():
 	for child in $DeathAudios.get_children():
 		death_audios.append(child)

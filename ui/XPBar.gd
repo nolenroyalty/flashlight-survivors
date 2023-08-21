@@ -29,6 +29,10 @@ func add_xp(amount):
 		emit_signal("reached_level", State.player_level)
 	set_foreground_scale()
 
+func reset():
+	xp = 0
+	set_foreground_scale()
+
 func _ready():
 	$Foreground.rect_scale.x = 0
 	set_foreground_scale()

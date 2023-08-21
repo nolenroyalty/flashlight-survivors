@@ -11,11 +11,17 @@ const MAX_HEALTH = 10
 var player_health = MAX_HEALTH setget set_health_do_not_call
 var player_level = 1
 var rng : RandomNumberGenerator
+var start_time = 0.0
+var end_time = 0.0
+
+func survival_time():
+	return int(end_time - start_time)
 
 func decrease_health(amount):
 	player_health -= amount
 	if player_health <= 0:
 		player_health = 0
+		end_time = Time.get_unix_time_from_system()
 		emit_signal("player_died")
 	emit_signal("health_set", player_health)
 	emit_signal("add_trauma", 0.25)
@@ -56,6 +62,21 @@ var max_speed_level = 6
 var drunkenness_level = 0
 var max_drunkenness_level = 2
 var number_of_big_totes = 0
+
+func set_start_time():
+	start_time = Time.get_unix_time_from_system()
+
+func reset():
+	player_health = MAX_HEALTH
+	player_level = 1
+	lamp_level = 0
+	beam_width_level = 0
+	fire_alarm_level = 0
+	track_lighting_level = 0
+	explode_level = 0
+	speed_level = 0
+	drunkenness_level = 0
+	number_of_big_totes = 0
 
 func current_level(upgrade):
 	match upgrade:

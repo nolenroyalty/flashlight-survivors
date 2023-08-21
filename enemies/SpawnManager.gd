@@ -1,7 +1,7 @@
 extends Node2D
 
 var Doorway = preload("res://enemies/Doorway.tscn")
-var Puddle = preload("res://enemies/PuddleGuy.tscn")
+var Puddle = preload("res://enemies/Puddleguy.tscn")
 
 var can_spawn_a_door_here = {}
 var can_spawn_a_puddle_here = {}
@@ -23,6 +23,7 @@ func spawn_door():
 	var chosen_point = choices[rng.randi() % len(choices)]
 	can_spawn_a_door_here[chosen_point] = false
 	var door = Doorway.instance()
+	door.add_to_group("enemies")
 	door.position = chosen_point
 	door.connect("despawned", self, "door_despawned", [chosen_point])
 	add_child(door)
@@ -43,11 +44,11 @@ func spawn_puddle():
 	var chosen_point = choices[rng.randi() % len(choices)]
 	can_spawn_a_puddle_here[chosen_point] = false
 	var puddle = Puddle.instance()
+	puddle.add_to_group("enemies")
 	puddle.position = chosen_point
 	puddle.connect("despawned", self, "puddle_despawned", [chosen_point])
 	add_child(puddle)
 	return true
-
 
 func door_spawn_chance_increment():
 	if State.player_level < 5: return 0.05
@@ -63,7 +64,6 @@ func maybe_spawn():
 		else:
 			current_door_spawn_chance = 0.5
 
-
 func _process(_delta):
 	if Input.is_action_just_pressed("debug_spawn_door"):
 		if spawn_door():
@@ -75,6 +75,16 @@ func _process(_delta):
 			print("puddle spawned")
 		else:
 			print("could not spawn puddle")
+
+func disable():
+	timer.stop()
+	for child in get_children():
+		if child.is_in_group("enemies"):
+			child.call_deferred("queue_free")
+
+func enable():
+	timer.start()
+
 
 func _ready():
 	rng = RandomNumberGenerator.new()

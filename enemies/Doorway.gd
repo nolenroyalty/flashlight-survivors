@@ -39,7 +39,8 @@ func spawn_enemy():
 			enemy = Spider.instance()
 		else:
 			enemy = Ghost.instance()
-
+		
+		enemy.add_to_group("enemies")
 		get_parent().add_child(enemy)
 		enemy.position = position
 		enemies_spawned += 1

@@ -51,6 +51,9 @@ func enable():
 	fire()
 	timer.start()
 
+func disable():
+	timer.stop()
+
 func _ready():
 	var _ignore = State.connect("tracklights_enabled", self, "enable")
 	timer.connect("timeout", self, "fire")

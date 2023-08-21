@@ -5,6 +5,7 @@
 [ext_resource path="res://sounds/Retro Blop 22.wav" type="AudioStream" id=3]
 
 [node name="AudioManager" type="Node2D"]
+pause_mode = 2
 script = ExtResource( 2 )
 
 [node name="DeathAudios" type="Node2D" parent="."]

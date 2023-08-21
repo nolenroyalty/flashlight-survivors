@@ -29,6 +29,11 @@ func shake():
 	offset.x = max_offset.x * amount * noise.get_noise_2d(noise.seed*2, noise_y)
 	offset.y = max_offset.y * amount * noise.get_noise_2d(noise.seed*3, noise_y)
 
+func reset():
+	offset = Vector2()
+	rotation = 0.0
+	trauma = 0.0
+
 func _process(delta):
 	if target:
 		global_position = get_node(target).global_position
