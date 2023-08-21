@@ -64,17 +64,17 @@ func maybe_spawn():
 		else:
 			current_door_spawn_chance = 0.5
 
-func _process(_delta):
-	if Input.is_action_just_pressed("debug_spawn_door"):
-		if spawn_door():
-			print("door spawned")
-		else:
-			print("could not spawn door")
-	if Input.is_action_just_pressed("debug_spawn_puddle"):
-		if spawn_puddle():
-			print("puddle spawned")
-		else:
-			print("could not spawn puddle")
+# func _process(_delta):
+# 	if Input.is_action_just_pressed("debug_spawn_door"):
+# 		if spawn_door():
+# 			print("door spawned")
+# 		else:
+# 			print("could not spawn door")
+# 	if Input.is_action_just_pressed("debug_spawn_puddle"):
+# 		if spawn_puddle():
+# 			print("puddle spawned")
+# 		else:
+# 			print("could not spawn puddle")
 
 func disable():
 	timer.stop()

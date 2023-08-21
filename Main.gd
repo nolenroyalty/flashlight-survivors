@@ -1,6 +1,7 @@
 extends Node2D
 var UpgradeDialogue = preload("res://ui/UpgradeDialogue.tscn")
 var LoseScreen = preload("res://ui/LoseScreen.tscn")
+var UIHelpers = preload("res://ui/UIHelpers.tscn")
 
 onready var player = $Player
 onready var healthbar = $Healthbar
@@ -25,9 +26,14 @@ func start():
 	$SpawnManager.enable()
 	State.set_start_time()
 
+func show_tutorial():
+	var tut = UIHelpers.instance()
+	add_child(tut)
+	tut.connect("tutorial_complete", self, "start")
+
 func restart():
 	get_tree().paused = false
-	start()
+	show_tutorial()
 
 func handle_death():
 	get_tree().paused = true
@@ -59,4 +65,4 @@ func _ready():
 	rng = RandomNumberGenerator.new()
 	rng.randomize()
 
-	start()
+	show_tutorial()

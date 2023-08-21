@@ -13,44 +13,44 @@ script = ExtResource( 2 )
 
 [node name="DeathAudio1" type="AudioStreamPlayer" parent="DeathAudios"]
 stream = ExtResource( 1 )
-volume_db = -5.0
+volume_db = -6.0
 
 [node name="DeathAudio2" type="AudioStreamPlayer" parent="DeathAudios"]
 stream = ExtResource( 1 )
-volume_db = -5.0
+volume_db = -6.0
 
 [node name="DeathAudio3" type="AudioStreamPlayer" parent="DeathAudios"]
 stream = ExtResource( 1 )
-volume_db = -5.0
+volume_db = -6.0
 
 [node name="ExplodeAudios" type="Node2D" parent="."]
 
 [node name="ExplodeAudio1" type="AudioStreamPlayer" parent="ExplodeAudios"]
 stream = ExtResource( 3 )
-volume_db = -5.0
+volume_db = -8.0
 
 [node name="ExplodeAudio2" type="AudioStreamPlayer" parent="ExplodeAudios"]
 stream = ExtResource( 3 )
-volume_db = -5.0
+volume_db = -8.0
 
 [node name="ExplodeAudio3" type="AudioStreamPlayer" parent="ExplodeAudios"]
 stream = ExtResource( 3 )
-volume_db = -5.0
+volume_db = -8.0
 
 [node name="ExplodeAudio4" type="AudioStreamPlayer" parent="ExplodeAudios"]
 stream = ExtResource( 3 )
-volume_db = -5.0
+volume_db = -8.0
 
 [node name="DoorcrashAudios" type="Node2D" parent="."]
 
 [node name="DoorAudio1" type="AudioStreamPlayer" parent="DoorcrashAudios"]
 stream = ExtResource( 4 )
-volume_db = -5.0
+volume_db = -8.0
 
 [node name="DoorAudio2" type="AudioStreamPlayer" parent="DoorcrashAudios"]
 stream = ExtResource( 4 )
-volume_db = -5.0
+volume_db = -8.0
 
 [node name="DoorAudio3" type="AudioStreamPlayer" parent="DoorcrashAudios"]
 stream = ExtResource( 4 )
-volume_db = -5.0
+volume_db = -8.0

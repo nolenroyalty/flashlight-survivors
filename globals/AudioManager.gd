@@ -32,5 +32,5 @@ func _ready():
 		death_audios.append(child)
 	for child in $ExplodeAudios.get_children():
 		explode_audios.append(child)
-	for child in $DoorAudios.get_children():
+	for child in $DoorcrashAudios.get_children():
 		door_audios.append(child)

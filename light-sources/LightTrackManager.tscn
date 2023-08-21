@@ -12,3 +12,4 @@ wait_time = 5.0
 [node name="Audio" type="AudioStreamPlayer" parent="."]
 pause_mode = 2
 stream = ExtResource( 2 )
+volume_db = -8.0

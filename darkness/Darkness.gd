@@ -39,9 +39,9 @@ func _process(_delta):
 
 	$Sprite.material.set_shader_param("flashlight_direction", Lights.flashlight_direction)
 	
-	if Input.is_action_pressed("debug_flash_light"):
-		$Sprite.material.set_shader_param("max_darkness", 0.75)
-		#$Sprite.material.set_shader_param("color_mix", Color("#8e3a47"))
-	elif Input.is_action_just_released("debug_flash_light"):
-		$Sprite.material.set_shader_param("max_darkness", 1.0)
-		#$Sprite.material.set_shader_param("color_mix", Color(0, 0, 0, 1))
+	# if Input.is_action_pressed("debug_flash_light"):
+	# 	$Sprite.material.set_shader_param("max_darkness", 0.75)
+	# 	#$Sprite.material.set_shader_param("color_mix", Color("#8e3a47"))
+	# elif Input.is_action_just_released("debug_flash_light"):
+	# 	$Sprite.material.set_shader_param("max_darkness", 1.0)
+	# 	#$Sprite.material.set_shader_param("color_mix", Color(0, 0, 0, 1))
