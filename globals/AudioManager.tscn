@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://sounds/Retro Blop 18.wav" type="AudioStream" id=1]
 [ext_resource path="res://globals/AudioManager.gd" type="Script" id=2]
 [ext_resource path="res://sounds/Retro Blop 22.wav" type="AudioStream" id=3]
+[ext_resource path="res://sounds/Retro FootStep Gravel 01.wav" type="AudioStream" id=4]
 
 [node name="AudioManager" type="Node2D"]
 pause_mode = 2
@@ -38,4 +39,18 @@ volume_db = -5.0
 
 [node name="ExplodeAudio4" type="AudioStreamPlayer" parent="ExplodeAudios"]
 stream = ExtResource( 3 )
+volume_db = -5.0
+
+[node name="DoorcrashAudios" type="Node2D" parent="."]
+
+[node name="DoorAudio1" type="AudioStreamPlayer" parent="DoorcrashAudios"]
+stream = ExtResource( 4 )
+volume_db = -5.0
+
+[node name="DoorAudio2" type="AudioStreamPlayer" parent="DoorcrashAudios"]
+stream = ExtResource( 4 )
+volume_db = -5.0
+
+[node name="DoorAudio3" type="AudioStreamPlayer" parent="DoorcrashAudios"]
+stream = ExtResource( 4 )
 volume_db = -5.0

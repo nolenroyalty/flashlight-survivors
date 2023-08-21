@@ -4,6 +4,8 @@ var death_audios = []
 var death_idx = 0
 var explode_audios = []
 var explode_idx = 0
+var door_audios = []
+var door_idx = 0
 
 func play_death():
 	death_audios[death_idx].play()
@@ -13,10 +15,16 @@ func play_explode():
 	explode_audios[explode_idx].play()
 	explode_idx = (explode_idx + 1) % len(explode_audios)
 
+func play_door_crash():
+	door_audios[door_idx].play()
+	door_idx = (door_idx + 1) % len(door_audios)
+
 func stop_all():
 	for audio in death_audios:
 		audio.stop()
 	for audio in explode_audios:
+		audio.stop()
+	for audio in door_audios:
 		audio.stop()
 
 func _ready():
@@ -24,3 +32,5 @@ func _ready():
 		death_audios.append(child)
 	for child in $ExplodeAudios.get_children():
 		explode_audios.append(child)
+	for child in $DoorAudios.get_children():
+		door_audios.append(child)

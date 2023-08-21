@@ -60,6 +60,7 @@ func damage(_amount):
 		return
 	i_have_taken_damage = true
 	if State.door_should_collapse():
+		AudioManager.play_door_crash()
 		U.xpbar.add_xp(xp_gain)
 		$Timer.stop()
 		anim.play("collapse")
