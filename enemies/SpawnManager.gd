@@ -53,7 +53,9 @@ func spawn_puddle():
 func door_spawn_chance_increment():
 	if State.player_level < 5: return 0.05
 	elif State.player_level < 10: return 0.1
-	else: return 0.2
+	else:
+		var x = State.player_level * 0.02
+		return min(0.8, x)
 
 var current_door_spawn_chance = .8
 func maybe_spawn():

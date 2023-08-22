@@ -11,17 +11,19 @@ const MAX_HEALTH = 10
 var player_health = MAX_HEALTH setget set_health_do_not_call
 var player_level = 1
 var rng : RandomNumberGenerator
-var start_time = 0.0
-var end_time = 0.0
+var survival_score = 0
 
 func survival_time():
-	return int(end_time - start_time)
+	return survival_score
+
+func incr_surival_time():
+	print("tick")
+	survival_score += 1
 
 func decrease_health(amount):
 	player_health -= amount
 	if player_health <= 0:
 		player_health = 0
-		end_time = Time.get_unix_time_from_system()
 		emit_signal("player_died")
 	emit_signal("health_set", player_health)
 	emit_signal("add_trauma", 0.25)
@@ -64,9 +66,11 @@ var max_drunkenness_level = 2
 var number_of_big_totes = 0
 
 func set_start_time():
-	start_time = Time.get_unix_time_from_system()
+	survival_score = 0
+	$ScoreTimer.start()
 
 func reset():
+	$ScoreTimer.stop()
 	player_health = MAX_HEALTH
 	player_level = 1
 	lamp_level = 0
@@ -77,6 +81,7 @@ func reset():
 	speed_level = 0
 	drunkenness_level = 0
 	number_of_big_totes = 0
+	survival_score = 0
 
 func current_level(upgrade):
 	match upgrade:
@@ -282,3 +287,4 @@ func door_should_collapse():
 func _ready():
 	rng = RandomNumberGenerator.new()
 	rng.randomize()
+	var _ignore = $ScoreTimer.connect("timeout", self, "incr_surival_time")
